@@ -15,6 +15,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 
 namespace ArticlesService
 {
@@ -29,26 +30,34 @@ namespace ArticlesService
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
 
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(options =>
-                {
-                    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
-                });
+            services.AddControllers();
 
-            services.AddControllersWithViews();
+            services.AddSwaggerGen();
+
             services.AddTransient<IArticleRepository, ArticleRepository>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("api", new OpenApiInfo()
+                {
+                    Title = "articlesApi",
+                    Version = "1.0"
+                });
+            });
+
+            services.AddCors();
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
             {
-                app.UseDeveloperExceptionPage();
-            }
+                c.SwaggerEndpoint("/swagger/api/swagger.json", "articles");
+            });
 
             app.UseRouting();
 
