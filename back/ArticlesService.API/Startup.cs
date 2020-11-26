@@ -2,19 +2,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ArticleService.Common;
 using ArticlesService.Domain.Interfaces;
 using ArticlesService.Domain.Models;
 using ArticlesService.Infrastructure;
 using ArticlesService.Infrastructure.Repositories;
-using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
 namespace ArticlesService
@@ -33,33 +32,57 @@ namespace ArticlesService
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
 
             services.AddControllers();
-
             services.AddSwaggerGen();
+
+            var authOptionsConfiguration = Configuration.GetSection("Auth");
+            services.Configure<AuthOptions>(authOptionsConfiguration);
+
+            var authOptions = authOptionsConfiguration.Get<AuthOptions>();
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.RequireHttpsMetadata = true;
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidIssuer = authOptions.Issuer,
+
+                        ValidateAudience = true,
+                        ValidAudience = authOptions.Audience,
+
+                        ValidateLifetime = true,
+
+                        IssuerSigningKey = authOptions.GetSymmetricSecurityKey(),
+                        ValidateIssuerSigningKey = true,
+                    };
+                });
 
             services.AddTransient<IArticleRepository, ArticleRepository>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
 
-            services.AddSwaggerGen(c =>
+            services.AddCors(options =>
             {
-                c.SwaggerDoc("api", new OpenApiInfo()
-                {
-                    Title = "articlesApi",
-                    Version = "1.0"
-                });
+                options.AddDefaultPolicy(
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin()
+                            .AllowAnyMethod()
+                            .AllowAnyHeader();
+                    });
             });
-
-            services.AddCors();
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/api/swagger.json", "articles");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "articles");
             });
 
             app.UseRouting();
+            app.UseCors();
 
             app.UseAuthentication();
             app.UseAuthorization();

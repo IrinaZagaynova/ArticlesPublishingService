@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ArticleModel } from '../../shared/models/article.model'
-import { ArticleRepository} from '../../shared/services/article.service'
+import { ArticleModel } from '../../models/article.model'
+import { ArticleRepository} from '../../services/article.service'
 
 @Component({
   selector: 'app-property-list',
@@ -11,17 +11,7 @@ export class PropertyListComponent implements OnInit{
 
   articles: ArticleModel[] = [];
 
-  constructor(private articleRepository: ArticleRepository) {
-    this.articleRepository.articles.subscribe(data => {
-      this.articles = data
-    })
-  }
-
-  ngOnChanges() {
-    this.articleRepository.articles.subscribe(data => {
-      this.articles = data
-    })
-  }
+  constructor(private articleRepository: ArticleRepository) {}
 
   public ngOnInit() {
     this.articleRepository.articles.subscribe(data => {

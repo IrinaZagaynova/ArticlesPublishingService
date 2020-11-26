@@ -7,6 +7,6 @@ namespace ArticlesService.Domain.Interfaces
 {
     public interface IUserRepository
     {
-        User GetById(int id);
+        User GetUser(Login login);
     }
 }

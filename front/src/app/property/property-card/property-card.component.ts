@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ArticleRepository } from 'src/app/shared/services/article.service';
-import { ArticleModel } from '../../shared/models/article.model'
+import { ArticleRepository } from 'src/app/services/article.service';
+import { ArticleModel } from '../../models/article.model'
 
 @Component({
   selector: 'app-property-card',
