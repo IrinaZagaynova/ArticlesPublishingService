@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PropertyListComponent } from './property/property-list/property-list.component';
 import { LoginComponent } from './login/login.component';
+import { PropertyListComponent } from './property/property-list/property-list.component';
 
 const routes: Routes = [
   { path: '', component: PropertyListComponent },
