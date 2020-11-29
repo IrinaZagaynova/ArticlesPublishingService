@@ -13,7 +13,6 @@ export const ACCESS_TOKEN_KEY = 'access_token'
   providedIn: 'root'
 })
 export class AuthService {
-
   constructor(
     private http: HttpClient,
     @Inject(API_URL) private apiUrl: string,

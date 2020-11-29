@@ -4,6 +4,7 @@ using ArticlesService.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace ArticlesService.Infrastructure.Repositories
@@ -40,9 +41,9 @@ namespace ArticlesService.Infrastructure.Repositories
             return result;
         }
 
-        ArticleDto IArticleRepository.GetById(int id)
+        ArticleDto IArticleRepository.GetArticleById(int id)
         {
-            throw new NotImplementedException();
+            return GetArticleDto(_context.Articles.Include(a => a.User).Include(a => a.Categories).Include(a => a.Images).SingleOrDefault(a => a.Id == id));
         }
     }
 }

@@ -9,8 +9,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 
-export class ArticleRepository {
-
+export class ArticleService {
   articles: BehaviorSubject<ArticleModel[]>;
 
   constructor(
@@ -19,9 +18,14 @@ export class ArticleRepository {
     private router: Router
   ) {
     this.articles = new BehaviorSubject<ArticleModel[]>([]);
-    this.http.get<ArticleModel[]>(apiUrl + 'api/Article/get-articles').subscribe(data => {
+    this.http.get<ArticleModel[]>(apiUrl + `api/Article/get-articles`).subscribe(data => {
       this.articles.next(data);
     })
+  }
+
+  getArticleById(id)
+  {
+    return this.http.get<ArticleModel>(this.apiUrl + `api/Article/get-article/${id}`)
   }
 
 }

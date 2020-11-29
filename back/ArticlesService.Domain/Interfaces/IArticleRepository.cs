@@ -11,7 +11,7 @@ namespace ArticlesService.Domain.Interfaces
         //void Create(Article article);
         //void Delete(int id);
         List<ArticleDto> GetArticles();
-        ArticleDto GetById(int id);
+        ArticleDto GetArticleById(int id);
         //List<Category> GetCategories();
     }
 }

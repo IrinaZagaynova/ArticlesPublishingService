@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ArticleRepository } from 'src/app/services/article.service';
 import { ArticleModel } from '../../models/article.model'
 
 @Component({

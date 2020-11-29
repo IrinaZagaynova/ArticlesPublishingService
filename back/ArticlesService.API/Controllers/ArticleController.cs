@@ -23,5 +23,11 @@ namespace ArticlesService.API.Controllers
         {
             return Ok(_repository.GetArticles());
         }
+
+        [HttpGet("get-article/{id}")]
+        public IActionResult GetArticleById(int id)
+        {
+            return Ok(_repository.GetArticleById(id));            
+        }
     }
 }
