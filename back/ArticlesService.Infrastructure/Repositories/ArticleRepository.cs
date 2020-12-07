@@ -24,7 +24,8 @@ namespace ArticlesService.Infrastructure.Repositories
                 Id = article.Id,
                 Title = article.Title,
                 Description = article.Description,
-                Content = article.Content
+                Content = article.Content,
+                UserLogin = article.User.Login
             };
         }
 

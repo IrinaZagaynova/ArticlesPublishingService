@@ -11,7 +11,6 @@ namespace ArticlesService.Infrastructure.Repositories
     public class UserRepository : IUserRepository
     {
         private readonly AppDbContext _context;
-
         public UserRepository(AppDbContext context)
         {
             _context = context;
@@ -21,5 +20,6 @@ namespace ArticlesService.Infrastructure.Repositories
         {
             return _context.Users.SingleOrDefault(u => u.EMail == login.Email && u.Password == login.Password);
         }
+
     }
 }

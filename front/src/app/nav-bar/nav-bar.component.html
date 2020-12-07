@@ -9,13 +9,15 @@
         <a class="nav-link" href="#" >Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#" routerLinkActive="active" *ngIf="authService.isAuthenticated()" >My articles</a>
+        <a class="nav-link" href="#" routerLinkActive="active" *ngIf="isLoggedIn" >My articles</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/create-article']" routerLinkActive="active" *ngIf="authService.isAuthenticated()">Create</a>
+        <a class="nav-link" [routerLink]="['/create-article']" routerLinkActive="active" *ngIf='isLoggedIn'>Create</a>
       </li>
     </ul>
-    <button class="btn btn-md btn-outline-primary" type="button" [routerLink]="['/login']">Sing in</button>
+    <button class="btn btn-md btn-outline-primary" type="button" [routerLink]="['/login']" *ngIf='!isLoggedIn'>Sign in</button>
+    <button class="btn btn-md btn-outline-primary" type="button" *ngIf='!isLoggedIn' >Sign up</button>
+    <button class="btn btn-md btn-outline-primary" type="button" *ngIf='isLoggedIn' (click)='logout()' >Sign out</button>
   </div>
 
 </nav>

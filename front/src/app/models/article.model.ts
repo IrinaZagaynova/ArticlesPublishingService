@@ -4,4 +4,5 @@ export class ArticleModel
   title: string;
   description: string;
   content: string;
+  userLogin: string;
 }
