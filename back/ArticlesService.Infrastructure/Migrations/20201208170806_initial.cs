@@ -2,7 +2,7 @@
 
 namespace ArticlesService.Infrastructure.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -128,8 +128,8 @@ namespace ArticlesService.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ArticleId = table.Column<int>(nullable: true),
-                    UserId = table.Column<int>(nullable: true),
+                    ArticleId = table.Column<int>(nullable: false),
+                    UserId = table.Column<int>(nullable: false),
                     Text = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -140,13 +140,13 @@ namespace ArticlesService.Infrastructure.Migrations
                         column: x => x.ArticleId,
                         principalTable: "Articles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Comments_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

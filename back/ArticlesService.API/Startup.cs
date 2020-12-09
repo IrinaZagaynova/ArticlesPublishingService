@@ -61,6 +61,7 @@ namespace ArticlesService
             services.AddTransient<IArticleRepository, ArticleRepository>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<ICommentRepository, CommentRepository>();
 
             services.AddCors(options =>
             {

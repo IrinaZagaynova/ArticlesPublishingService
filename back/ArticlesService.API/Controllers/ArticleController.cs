@@ -18,13 +18,13 @@ namespace ArticlesService.API.Controllers
             _repository = repository;
         }
 
-        [HttpGet("get-articles")]
+        [HttpGet("articles")]
         public IActionResult GetArticles()
         {
             return Ok(_repository.GetArticles());
         }
 
-        [HttpGet("get-article/{id}")]
+        [HttpGet("article/{id}")]
         public IActionResult GetArticleById(int id)
         {
             return Ok(_repository.GetArticleById(id));            

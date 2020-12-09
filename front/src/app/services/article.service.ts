@@ -18,14 +18,14 @@ export class ArticleService {
     private router: Router
   ) {
     this.articles = new BehaviorSubject<ArticleModel[]>([]);
-    this.http.get<ArticleModel[]>(apiUrl + `api/Article/get-articles`).subscribe(data => {
+    this.http.get<ArticleModel[]>(apiUrl + `api/Article/articles`).subscribe(data => {
       this.articles.next(data);
     })
   }
 
   getArticleById(id)
   {
-    return this.http.get<ArticleModel>(this.apiUrl + `api/Article/get-article/${id}`)
+    return this.http.get<ArticleModel>(this.apiUrl + `api/Article/article/${id}`)
   }
 
 }

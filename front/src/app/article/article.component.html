@@ -12,4 +12,11 @@
   <div class="comments">
     <h4>Комментарии</h4>
   </div>
+  <div class="comments-list row">
+    <div class="row row-cols-1 row-cols-md-1">
+      <div *ngFor="let comment of comments" class="comments">
+        <app-comment [comment]="comment"></app-comment>
+      </div>
+    </div>
+  </div>
 </div>
