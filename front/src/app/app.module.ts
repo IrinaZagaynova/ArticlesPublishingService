@@ -17,6 +17,7 @@ import { LoginComponent } from './login/login.component';
 import { ArticleComponent } from './article/article.component';
 import { CommentComponent } from './comment/comment.component';
 import { CreateArticleComponent } from './create-article/create-article.component';
+import { RegistrationComponent } from './registration/registration.component';
 
 export function tokenGetter() {
   return localStorage.getItem(ACCESS_TOKEN_KEY);
@@ -32,6 +33,7 @@ export function tokenGetter() {
     ArticleComponent,
     CreateArticleComponent,
     CommentComponent,
+    RegistrationComponent,
    ],
   imports: [
     CommonModule,

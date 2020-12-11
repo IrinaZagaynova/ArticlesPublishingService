@@ -1,7 +1,7 @@
 <div class="common">
   <h1>{{article.title}}</h1>
   <div class= "autor-login">
-    <p>{{article.userLogin}}</p>
+    <p>author: {{article.userLogin}}</p>
   </div>
   <div class="description">
     <p>{{article.description}}</p>
@@ -12,12 +12,18 @@
   <div class="comments">
     <h4>Комментарии</h4>
   </div>
-  <form class="comment-form">
+  <div>
+  <p *ngIf='!isLoggedIn'>
+    <a [routerLink]="['/login']">Авторизуйтесь</a>, чтобы иметь возможность оставлять комментарии.
+    <a [routerLink]="['/registration']">Зарегистрируйтесь</a>, если у вас еще нет аккаунта.
+  </p>
+  </div>
+  <form class="add-comment-form" *ngIf='isLoggedIn'>
     <div class="form-group">
-      <textarea class="form-control" [(ngModel)]="text" name="text"></textarea>
+      <textarea class="form-control" id="comment" [(ngModel)]="text" name="text"></textarea>
     </div>
     <div class="form-group">
-      <button class="btn btn-primary" type="submit" (click)="createComment()">Добавить</button>
+      <button class="btn btn-primary" name="add-comment-button" type="submit" (click)="createComment()">Добавить</button>
     </div>
   </form>
   <div class="comments-list row">

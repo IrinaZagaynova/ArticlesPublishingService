@@ -11,7 +11,7 @@ import { FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-article',
   templateUrl: './article.component.html',
-  styleUrls: ['./article.component.css']
+  styleUrls: ['./article.component.css'],
 })
 export class ArticleComponent implements OnInit{
   @Output() update: EventEmitter<any> = new EventEmitter<any>()
@@ -46,13 +46,18 @@ export class ArticleComponent implements OnInit{
   }
 
   createComment() {
+    if (!this.text)
+    {
+      alert("Комментарий не может быть пустым.")
+      return
+    }
+
     this.commentService.createComment(this.article.id, this.text)
     .subscribe(res => {
       this.getComments()
-      this.commentForm.reset()
-      this.text = ""
+      this.text = "";
     }, error => {
-      alert("Не удалось добавить комментарий")
+      alert("Не удалось добавить комментарий.")
     })
   }
 }
