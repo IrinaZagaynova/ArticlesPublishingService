@@ -12,9 +12,17 @@
   <div class="comments">
     <h4>Комментарии</h4>
   </div>
+  <form class="comment-form">
+    <div class="form-group">
+      <textarea class="form-control" [(ngModel)]="text" name="text"></textarea>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary" type="submit" (click)="createComment()">Добавить</button>
+    </div>
+  </form>
   <div class="comments-list row">
     <div class="row row-cols-1 row-cols-md-1">
-      <div *ngFor="let comment of comments" class="comments">
+      <div *ngFor="let comment of comments.reverse()" class="comments">
         <app-comment [comment]="comment"></app-comment>
       </div>
     </div>

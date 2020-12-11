@@ -1,8 +1,10 @@
-﻿using ArticlesService.Domain.Interfaces;
+﻿using ArticlesService.Domain.Dto;
+using ArticlesService.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace ArticlesService.API.Controllers
@@ -18,16 +20,31 @@ namespace ArticlesService.API.Controllers
             _repository = repository;
         }
 
-        [HttpGet("comments-count/{id}")]
-        public IActionResult GetCommentsCount(int id)
+        [HttpGet("comments-count/{articleId}")]
+        public IActionResult GetCommentsCount(int articleId)
         {
-            return Ok( _repository.GetCommentsCount(id));
+            return Ok( _repository.GetCommentsCount(articleId));
         }
 
-        [HttpGet("comments/{id}")]
-        public IActionResult GetComments(int id)
+        [HttpGet("comments/{articleId}")]
+        public IActionResult GetComments(int articleId)
         {
-            return Ok(_repository.GetComments(id));
+            return Ok(_repository.GetComments(articleId));
+        }
+
+        [HttpPost("create-comment")]
+        public IActionResult CreateComment(CreateCommentDto createCommentDto)
+        {
+            var userId = int.Parse(User.Claims.Single(c => c.Type == ClaimTypes.NameIdentifier).Value);
+            try
+            {
+                _repository.CreateComment(userId, createCommentDto);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+            return Ok();
         }
     }
 }

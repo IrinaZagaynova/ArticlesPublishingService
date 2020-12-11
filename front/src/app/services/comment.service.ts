@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
   providedIn: 'root'
 })
 
-export class CommentsService {
+export class CommentService {
   comments: BehaviorSubject<CommentModel[]>
 
   constructor(
@@ -19,7 +19,15 @@ export class CommentsService {
     private router: Router
   ) { }
 
-    getComments(id: number) {
-      return this.http.get<CommentModel[]>(this.apiUrl + `api/Comment/comments/${id}`)
+    getComments(articleId: number) {
+      return this.http.get<CommentModel[]>(this.apiUrl + `api/Comment/comments/${articleId}`)
+    }
+
+    getCommentsCount(articleId: number) {
+      return this.http.get<number>(this.apiUrl + `api/Comment/comments-count/${articleId}`)
+    }
+
+    createComment(articleId: number, text: string) {
+      return this.http.post(this.apiUrl + `api/Comment/create-comment`, {articleId, text});
     }
 }

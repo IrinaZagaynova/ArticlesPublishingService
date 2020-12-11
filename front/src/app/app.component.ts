@@ -14,7 +14,8 @@ export class AppComponent {
   constructor(private as: AuthService) {}
 
   login(email: string, password: string) {
-    this.as.login(email, password).subscribe(res => {
+    this.as.login(email, password)
+    .subscribe(res => {
     }, error => {
       alert('Wrong login or password')
     })

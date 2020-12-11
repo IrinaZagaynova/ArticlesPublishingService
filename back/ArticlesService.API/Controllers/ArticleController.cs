@@ -24,10 +24,10 @@ namespace ArticlesService.API.Controllers
             return Ok(_repository.GetArticles());
         }
 
-        [HttpGet("article/{id}")]
-        public IActionResult GetArticleById(int id)
+        [HttpGet("article/{articleId}")]
+        public IActionResult GetArticleById(int articleId)
         {
-            return Ok(_repository.GetArticleById(id));            
+            return Ok(_repository.GetArticleById(articleId));            
         }
     }
 }

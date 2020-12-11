@@ -17,6 +17,7 @@ namespace ArticlesService.Infrastructure.Repositories
         {
             _context = context;
         }
+
         public CommentDto GetCommentDto(Comment comment)
         {
             return new CommentDto()
@@ -42,6 +43,19 @@ namespace ArticlesService.Infrastructure.Repositories
         public int GetCommentsCount(int articleId)
         {
             return _context.Comments.Where(c => c.ArticleId == articleId).Count();
+        }
+
+        public void CreateComment(int userId, CreateCommentDto createCommentDto)
+        {
+            var comment = new Comment
+            {
+                ArticleId = createCommentDto.ArticleId,
+                UserId = userId,
+                Text = createCommentDto.Text
+            };
+
+            _context.Add(comment);
+            _context.SaveChanges();
         }
     }
 }

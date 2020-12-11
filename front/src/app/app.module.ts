@@ -15,8 +15,8 @@ import { API_URL } from './app-injection-tokens';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
 import { ArticleComponent } from './article/article.component';
-import { CreateArticleComponent } from './create-article/create-article.component';
 import { CommentComponent } from './comment/comment.component';
+import { CreateArticleComponent } from './create-article/create-article.component';
 
 export function tokenGetter() {
   return localStorage.getItem(ACCESS_TOKEN_KEY);

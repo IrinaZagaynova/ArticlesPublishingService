@@ -1,13 +1,12 @@
-import { ThisReceiver } from '@angular/compiler';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
 
 import { ArticleModel } from '../models/article.model';
 import { CommentModel } from '../models/comment.model';
 import { ArticleService } from '../services/article.service';
-import { CommentsService } from '../services/comments.service';
-
+import { CommentService } from '../services/comment.service';
+import { AuthService } from '../services/auth.service';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-article',
@@ -15,12 +14,16 @@ import { CommentsService } from '../services/comments.service';
   styleUrls: ['./article.component.css']
 })
 export class ArticleComponent implements OnInit{
+  @Output() update: EventEmitter<any> = new EventEmitter<any>()
   article: ArticleModel
   comments: CommentModel[] = []
+  commentForm: FormGroup
+  text: string = ''
 
   constructor(
     private articleService: ArticleService,
-    private commentService: CommentsService,
+    private commentService: CommentService,
+    private authService: AuthService,
     private router: ActivatedRoute
   ) {
   }
@@ -29,9 +32,27 @@ export class ArticleComponent implements OnInit{
     this.articleService.getArticleById(this.router.snapshot.params.id).subscribe(res => {
       this.article = res
     });
+    this.getComments()
+  }
+
+  getComments() {
     this.commentService.getComments(this.router.snapshot.params.id).subscribe(data => {
-      this.comments  = data
+      this.comments = data
     });
   }
 
+  public get isLoggedIn(): boolean {
+    return this.authService.isAuthenticated()
+  }
+
+  createComment() {
+    this.commentService.createComment(this.article.id, this.text)
+    .subscribe(res => {
+      this.getComments()
+      this.commentForm.reset()
+      this.text = ""
+    }, error => {
+      alert("Не удалось добавить комментарий")
+    })
+  }
 }
