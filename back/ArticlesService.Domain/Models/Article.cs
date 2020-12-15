@@ -15,7 +15,7 @@ namespace ArticlesService.Domain.Models
         [Required]
         public string Content { get; set; }
         public User User { get; set; }
-        public List<ArticleCategory> Categories { get; set; }
-        public List<ArticleImage> Images { get; set; }
+        public List<ArticleCategory> Categories { get; set; } = new List<ArticleCategory>();
+        public List<ArticleImage> Images { get; set; } = new List<ArticleImage>();
     }
 }

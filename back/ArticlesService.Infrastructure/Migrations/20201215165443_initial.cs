@@ -12,7 +12,8 @@ namespace ArticlesService.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(nullable: true)
+                    Title = table.Column<string>(nullable: false),
+                    ArticleId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -25,7 +26,8 @@ namespace ArticlesService.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Path = table.Column<string>(nullable: true)
+                    Path = table.Column<string>(nullable: false),
+                    ArticleId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -38,10 +40,10 @@ namespace ArticlesService.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Login = table.Column<string>(nullable: true),
-                    EMail = table.Column<string>(nullable: true),
+                    Login = table.Column<string>(nullable: false),
+                    EMail = table.Column<string>(nullable: false),
                     Name = table.Column<string>(nullable: true),
-                    Password = table.Column<string>(nullable: true)
+                    Password = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -54,9 +56,9 @@ namespace ArticlesService.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    Content = table.Column<string>(nullable: true),
+                    Title = table.Column<string>(nullable: false),
+                    Description = table.Column<string>(nullable: false),
+                    Content = table.Column<string>(nullable: false),
                     UserId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -130,7 +132,7 @@ namespace ArticlesService.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ArticleId = table.Column<int>(nullable: false),
                     UserId = table.Column<int>(nullable: false),
-                    Text = table.Column<string>(nullable: true)
+                    Text = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {

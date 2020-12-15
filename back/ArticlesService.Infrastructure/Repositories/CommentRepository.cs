@@ -27,6 +27,7 @@ namespace ArticlesService.Infrastructure.Repositories
                 Text = comment.Text
             };
         }
+
         public List<CommentDto> GetComments(int articleId)
         {
             var result = new List<CommentDto>();

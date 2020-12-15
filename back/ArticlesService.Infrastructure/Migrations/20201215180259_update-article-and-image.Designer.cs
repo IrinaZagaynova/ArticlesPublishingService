@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ArticlesService.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20201211200933_new-required-fields")]
-    partial class newrequiredfields
+    [Migration("20201215180259_update-article-and-image")]
+    partial class updatearticleandimage
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -69,7 +69,7 @@ namespace ArticlesService.Infrastructure.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("ArticleCategory");
+                    b.ToTable("ArticleCategories");
                 });
 
             modelBuilder.Entity("ArticlesService.Domain.Models.ArticleImage", b =>

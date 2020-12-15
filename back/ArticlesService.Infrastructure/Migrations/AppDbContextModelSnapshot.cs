@@ -67,7 +67,7 @@ namespace ArticlesService.Infrastructure.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("ArticleCategory");
+                    b.ToTable("ArticleCategories");
                 });
 
             modelBuilder.Entity("ArticlesService.Domain.Models.ArticleImage", b =>

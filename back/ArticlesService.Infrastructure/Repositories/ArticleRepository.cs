@@ -16,6 +16,7 @@ namespace ArticlesService.Infrastructure.Repositories
         {
             _context = context;
         }
+
         private ArticleDto GetArticleDto(Article article)
         {
             return new ArticleDto()

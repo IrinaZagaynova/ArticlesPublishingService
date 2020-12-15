@@ -63,16 +63,23 @@ namespace ArticlesService
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<ICommentRepository, CommentRepository>();
 
-            services.AddCors(options =>
+
+            services.AddCors(options => options.AddPolicy("ApiCorsPolicy", builder =>
             {
-                options.AddDefaultPolicy(
-                    builder =>
-                    {
-                        builder.AllowAnyOrigin()
-                            .AllowAnyMethod()
-                            .AllowAnyHeader();
-                    });
-            });
+                builder.WithOrigins("http://localhost:5001").AllowAnyMethod().AllowAnyHeader();
+            }));
+
+
+            //services.AddCors(options =>
+            //{
+            //    options.AddDefaultPolicy(
+            //        builder =>
+            //        {
+            //            builder.AllowAnyOrigin()
+            //                .AllowAnyMethod()
+            //                .AllowAnyHeader();
+            //        });
+            //});
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -83,7 +90,7 @@ namespace ArticlesService
             });
 
             app.UseRouting();
-            app.UseCors();
+            app.UseCors("ApiCorsPolicy");
 
             app.UseAuthentication();
             app.UseAuthorization();
