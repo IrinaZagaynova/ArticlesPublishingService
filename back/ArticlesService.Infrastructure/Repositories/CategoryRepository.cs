@@ -18,10 +18,10 @@ namespace ArticlesService.Infrastructure.Repositories
             _context = context;
         }
 
-        public List<Category> GetCategories(int articleId)
+        public List<CategoryDto> GetCategories(int articleId)
         {
             return _context.Categories.Include(c => c.Categories).Where(a => a.Categories.Any(c => c.ArticleId == articleId))
-                .Select(c => new Category
+                .Select(c => new CategoryDto
                 {
                     Id = c.Id,
                     Title = c.Title
