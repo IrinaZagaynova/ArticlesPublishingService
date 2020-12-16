@@ -9,7 +9,7 @@ namespace ArticlesService.Domain.Models
     {
         public int Id { get; set; }
         [Required]
-        public string Path { get; set; }
+        public string Name { get; set; }
         public List<ArticleImage> Images { get; set; } = new List<ArticleImage>();
     }
 }

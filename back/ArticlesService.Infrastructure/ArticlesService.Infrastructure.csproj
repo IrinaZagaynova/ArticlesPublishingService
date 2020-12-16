@@ -21,8 +21,4 @@
     <ProjectReference Include="..\ArticlesService.Domain\ArticlesService.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Resources\Images\" />
-  </ItemGroup>
-
 </Project>

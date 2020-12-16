@@ -15,5 +15,6 @@ namespace ArticlesService.Infrastructure
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Image> Images { get; set; }
         public DbSet<ArticleCategory> ArticleCategories { get; set; }
+        public DbSet<ArticleImage> ArticleImages { get; set; }
     }
 }

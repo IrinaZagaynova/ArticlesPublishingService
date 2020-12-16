@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ActivatedRoute} from '@angular/router';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { ArticleModel } from '../models/article.model';
 import { CommentModel } from '../models/comment.model';
@@ -9,6 +9,8 @@ import { CommentService } from '../services/comment.service';
 import { CategoryService } from '../services/category.service';
 import { AuthService } from '../services/auth.service';
 import { FormGroup } from '@angular/forms';
+import { ImageModel } from '../models/image.model';
+import { ImageService } from '../services/image.service';
 
 @Component({
   selector: 'app-article',
@@ -22,11 +24,13 @@ export class ArticleComponent implements OnInit{
   commentForm: FormGroup
   text: string = ''
   categories: CategoryModel[] = []
+  images: ImageModel[] = []
 
   constructor(
     private articleService: ArticleService,
     private commentService: CommentService,
     private categoryService: CategoryService,
+    private imageService: ImageService,
     private authService: AuthService,
     private router: ActivatedRoute
   ) {
@@ -38,6 +42,7 @@ export class ArticleComponent implements OnInit{
     });
     this.getComments()
     this.getCategories()
+    this.getImages()
   }
 
   getComments() {
@@ -69,6 +74,12 @@ export class ArticleComponent implements OnInit{
   getCategories() {
     this.categoryService.getCategoies(this.router.snapshot.params.id).subscribe(data => {
       this.categories = data
+    });
+  }
+
+  getImages() {
+    this.imageService.getImages(this.router.snapshot.params.id).subscribe(data => {
+      this.images = data
     });
   }
 }
