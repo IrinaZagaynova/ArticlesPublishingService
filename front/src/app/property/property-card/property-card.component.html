@@ -1,6 +1,15 @@
 <div class="card">
   <h5>{{ article.title }}</h5>
-  <p>{{ article.description }} </p>
+  <div class="categories-list">
+    <div class="row row-cols-7 row-cols-md-7">
+      <div *ngFor="let category of categories" class="categories">
+        <app-category [category]="category"></app-category>
+      </div>
+    </div>
+  </div>
+  <div class="description">
+    <p>{{ article.description }} </p>
+  </div>
   <div class="description-button">
   <button type="button" class="btn btn-dark btn-sm" routerLink="/article/{{article.id}}">Подробнее</button>
   </div>

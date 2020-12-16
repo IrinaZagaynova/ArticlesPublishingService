@@ -3,8 +3,10 @@ import { ActivatedRoute} from '@angular/router';
 
 import { ArticleModel } from '../models/article.model';
 import { CommentModel } from '../models/comment.model';
+import { CategoryModel } from '../models/category.model';
 import { ArticleService } from '../services/article.service';
 import { CommentService } from '../services/comment.service';
+import { CategoryService } from '../services/category.service';
 import { AuthService } from '../services/auth.service';
 import { FormGroup } from '@angular/forms';
 
@@ -19,10 +21,12 @@ export class ArticleComponent implements OnInit{
   comments: CommentModel[] = []
   commentForm: FormGroup
   text: string = ''
+  categories: CategoryModel[] = []
 
   constructor(
     private articleService: ArticleService,
     private commentService: CommentService,
+    private categoryService: CategoryService,
     private authService: AuthService,
     private router: ActivatedRoute
   ) {
@@ -33,6 +37,7 @@ export class ArticleComponent implements OnInit{
       this.article = res
     });
     this.getComments()
+    this.getCategories()
   }
 
   getComments() {
@@ -59,5 +64,11 @@ export class ArticleComponent implements OnInit{
     }, error => {
       alert("Не удалось добавить комментарий.")
     })
+  }
+
+  getCategories() {
+    this.categoryService.getCategoies(this.router.snapshot.params.id).subscribe(data => {
+      this.categories = data
+    });
   }
 }
