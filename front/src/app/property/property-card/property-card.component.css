@@ -5,6 +5,12 @@
   border: none;
 }
 
+.autor-login
+{
+  height: 30px;
+  font-weight: 500;
+}
+
 .description-button
 {
   margin: 15px auto 0 0;

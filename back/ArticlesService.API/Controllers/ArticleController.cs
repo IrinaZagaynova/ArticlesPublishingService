@@ -1,4 +1,5 @@
-﻿using ArticlesService.Domain.Interfaces;
+﻿using ArticlesService.Domain.Dto;
+using ArticlesService.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -29,5 +30,24 @@ namespace ArticlesService.API.Controllers
         {
             return Ok(_repository.GetArticleById(articleId));            
         }
+
+        [HttpGet("articles-by-title")]
+        public IActionResult GetArticlesByTitle(string title)
+        {
+            return Ok(_repository.GetArticlesByTitle(title));
+        }
+
+        [HttpGet("articles-by-author")]
+        public IActionResult GetArticlesByAuthorLogin(string login)
+        {
+            return Ok(_repository.GetArticlesByAuthorLogin(login));
+        }
+
+        [HttpPost("articles-by-categories")]
+        public IActionResult GetArticlesByCategories(List<CategoryDto> categories)
+        {
+            return Ok(_repository.GetArticlesByCategories(categories));
+        }
+
     }
 }

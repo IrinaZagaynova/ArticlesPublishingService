@@ -3,6 +3,12 @@
   margin: 0 25% 0;
 }
 
+.autor-login
+{
+  height: 30px;
+  font-weight: 500;
+}
+
 .form-control
 {
   resize: none;
@@ -18,6 +24,7 @@
 {
   margin: 0 0 15px 8px;
 }
+
 
 .image
 {

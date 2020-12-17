@@ -12,6 +12,8 @@ namespace ArticlesService.Domain.Interfaces
         //void Delete(int id);
         List<ArticleDto> GetArticles();
         ArticleDto GetArticleById(int id);
-        //List<Category> GetCategories();
+        List<ArticleDto> GetArticlesByTitle(string title);
+        List<ArticleDto> GetArticlesByAuthorLogin(string login);
+        List<ArticleDto> GetArticlesByCategories(List<CategoryDto> categories);
     }
 }
