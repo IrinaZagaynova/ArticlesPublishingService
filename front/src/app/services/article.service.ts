@@ -23,9 +23,16 @@ export class ArticleService {
     })
   }
 
-  getArticleById(id)
-  {
+  getArticleById(id) {
     return this.http.get<ArticleModel>(this.apiUrl + `api/Article/article/${id}`)
+  }
+
+  getAtriclesByTitle(title: string) {
+    return this.http.get<ArticleModel[]>(this.apiUrl + `api/Article/articles-by-title?title=${title}`)
+  }
+
+  getAtriclesByAuthor(author: string) {
+    return this.http.get<ArticleModel[]>(this.apiUrl + `api/Article/articles-by-author?login=${author}`)
   }
 
 }

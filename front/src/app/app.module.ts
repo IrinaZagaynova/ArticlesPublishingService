@@ -35,7 +35,7 @@ export function tokenGetter() {
     CreateArticleComponent,
     CommentComponent,
     RegistrationComponent,
-    CategoryComponent,
+    CategoryComponent
    ],
   imports: [
     CommonModule,

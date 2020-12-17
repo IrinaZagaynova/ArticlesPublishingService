@@ -1,4 +1,22 @@
-.articles-list
+.common
 {
   margin: 0 25% 0;
+}
+
+.search-in-articles{
+  border: 1px solid #ccc;
+  display: inline-block;
+  border-radius: 3px;
+  font-size: 20px;
+  display: inline-flex;
+}
+
+.form-control
+{
+  border: none;
+}
+
+.fas.fa-search{
+  color: #ccc;
+  padding: 10px;
 }

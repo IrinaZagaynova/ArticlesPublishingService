@@ -1,7 +1,19 @@
-<div class="articles-list row">
-  <div class="row row-cols-1 row-cols-md-1">
-    <div *ngFor="let article of articles" class="article">
-      <app-property-card [article]="article"></app-property-card>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<div class="common">
+  <form class="search-in-articles">
+    <input class="form-control" id="title" [(ngModel)]="title" name="title" placeholder="Title">
+    <i class="fas fa-search" type="submit" (click)="getArticlesByTitle()"></i>
+  </form>
+  <form class="search-in-articles">
+    <input class="form-control" id="author" [(ngModel)]="author" name="author" placeholder="Author">
+    <i class="fas fa-search" type="submit" (click)="getArticlesByAutor()"></i>
+  </form>
+  <div class="articles-list row">
+    <div class="row row-cols-1 row-cols-md-1">
+      <div *ngFor="let article of articles" class="article">
+       <app-property-card [article]="article"></app-property-card>
+      </div>
     </div>
   </div>
 </div>

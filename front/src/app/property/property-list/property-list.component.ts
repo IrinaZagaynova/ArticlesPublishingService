@@ -8,14 +8,48 @@ import { ArticleService} from '../../services/article.service'
   styleUrls: ['./property-list.component.css']
 })
 export class PropertyListComponent implements OnInit{
-
   articles: ArticleModel[] = [];
+  title: string = ''
+  author: string = ''
 
-  constructor(private articleRepository: ArticleService) {}
+  constructor(private articleService: ArticleService,) {}
 
   public ngOnInit() {
-    this.articleRepository.articles.subscribe(data => {
+    this.articleService.articles.subscribe(data => {
       this.articles = data
     })
   }
+
+  getArticlesByTitle() {
+    if (!this.title)
+    {
+      alert("Форма не может быть пустой")
+      return
+    }
+
+    this.articleService.getAtriclesByTitle(this.title)
+    .subscribe(res => {
+      this.articles = res
+      this.title = "";
+    }, error => {
+      alert("Ошибка поиска")
+    })
+  }
+
+  getArticlesByAutor() {
+    if (!this.author)
+    {
+      alert("Форма не может быть пустой")
+      return
+    }
+
+    this.articleService.getAtriclesByAuthor(this.author)
+    .subscribe(res => {
+      this.articles = res
+      this.author = "";
+    }, error => {
+      alert("Ошибка поиска")
+    })
+  }
+
 }
