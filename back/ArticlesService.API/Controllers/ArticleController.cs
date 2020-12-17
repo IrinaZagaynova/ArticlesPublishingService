@@ -44,7 +44,7 @@ namespace ArticlesService.API.Controllers
         }
 
         [HttpPost("articles-by-categories")]
-        public IActionResult GetArticlesByCategories(List<CategoryDto> categories)
+        public IActionResult GetArticlesByCategories(List<int> categories)
         {
             return Ok(_repository.GetArticlesByCategories(categories));
         }

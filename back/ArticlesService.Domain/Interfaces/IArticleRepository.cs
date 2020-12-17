@@ -14,6 +14,6 @@ namespace ArticlesService.Domain.Interfaces
         ArticleDto GetArticleById(int id);
         List<ArticleDto> GetArticlesByTitle(string title);
         List<ArticleDto> GetArticlesByAuthorLogin(string login);
-        List<ArticleDto> GetArticlesByCategories(List<CategoryDto> categories);
+        List<ArticleDto> GetArticlesByCategories(List<int> categories);
     }
 }

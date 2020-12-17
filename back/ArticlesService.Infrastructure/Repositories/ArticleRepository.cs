@@ -72,9 +72,24 @@ namespace ArticlesService.Infrastructure.Repositories
             return result;
         }
 
-        public List<ArticleDto> GetArticlesByCategories(List<CategoryDto> categories)
+        public List<ArticleDto> GetArticlesByCategories(List<int> categories)
         {
-            return null;
+            var articles = _context.Articles.Include(a => a.User).Include(a => a.Categories).Include(a => a.Images);
+            var result = new List<ArticleDto>();
+
+            foreach (var article in articles)
+            {
+                foreach (var categody in categories)
+                {
+                    if (article.Categories.Any(c => c.CategoryId == categody))
+                    {
+                        result.Add(GetArticleDto(article));
+                        break;
+                    }
+                }
+            }
+
+            return result;
         }
     }
 }
