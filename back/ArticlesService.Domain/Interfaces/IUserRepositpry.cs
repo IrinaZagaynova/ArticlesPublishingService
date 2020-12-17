@@ -9,5 +9,6 @@ namespace ArticlesService.Domain.Interfaces
     public interface IUserRepository
     {
         User GetUser(Login login);
+        User Register(UserDto userDto);
     }
 }
