@@ -1,5 +1,4 @@
 ﻿using ArticleService.Common;
-using ArticlesService.Domain.Dto;
 using ArticlesService.Domain.Interfaces;
 using ArticlesService.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -44,22 +43,6 @@ namespace ArticlesService.API.Controllers
             return Unauthorized();
         }
 
-        [HttpPost("register")]
-        public IActionResult Register(UserDto userDto)
-        {
-            var user = _repository.Register(userDto);
-            if (user != null)
-            {
-                var token = GenerateJwt(user);
-
-                return Ok(new
-                {
-                    access_token = token
-                });
-            }
-
-            return Unauthorized();
-        }
         internal string GenerateJwt(User user)
         { 
             var authParams = _authOptions.Value;
