@@ -11,9 +11,10 @@ namespace ArticlesService.Domain.Interfaces
         //void Create(Article article);
         //void Delete(int id);
         List<ArticleDto> GetArticles();
-        ArticleDto GetArticleById(int id);
+        ArticleDto GetArticle(int articleId);
         List<ArticleDto> GetArticlesByTitle(string title);
         List<ArticleDto> GetArticlesByAuthorLogin(string login);
         List<ArticleDto> GetArticlesByCategories(List<int> categories);
+        List<ArticleDto> GetArticleByUserId(int userId);
     }
 }

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace ArticlesService.API.Controllers
@@ -28,7 +29,7 @@ namespace ArticlesService.API.Controllers
         [HttpGet("article/{articleId}")]
         public IActionResult GetArticleById(int articleId)
         {
-            return Ok(_repository.GetArticleById(articleId));            
+            return Ok(_repository.GetArticle(articleId));            
         }
 
         [HttpGet("articles-by-title")]
@@ -47,6 +48,14 @@ namespace ArticlesService.API.Controllers
         public IActionResult GetArticlesByCategories(List<int> categories)
         {
             return Ok(_repository.GetArticlesByCategories(categories));
+        }
+
+        [HttpGet("get-user-articles")]
+        public IActionResult GetUserArticles()
+        {
+            var userId = int.Parse(User.Claims.Single(c => c.Type == ClaimTypes.NameIdentifier).Value);
+            System.Console.WriteLine(userId);
+            return Ok(_repository.GetArticleByUserId(userId));
         }
 
     }

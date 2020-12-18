@@ -19,7 +19,8 @@ export class LoginComponent {
     this.authService.login(form.value.email, form.value.password)
     .subscribe({
       next: (res: any) => {
-        this.router.navigate([''], {skipLocationChange: true})
+        this.router.navigateByUrl('', {skipLocationChange: true}).then(()=>
+        this.router.navigate([""]));
       },
       error: err => {
         alert('Не правильный логин или пароль')

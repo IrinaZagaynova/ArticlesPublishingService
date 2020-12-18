@@ -6,8 +6,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { AppComponent } from './app.component';
-import { PropertyCardComponent } from './property/property-card/property-card.component';
-import { PropertyListComponent } from './property/property-list/property-list.component';
+import { ArticleCardComponent } from './article-card/article-card.component';
+import { ArticlesListComponent } from './articles-list/articles-list.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { environment } from 'src/environments/environment';
 import { ACCESS_TOKEN_KEY } from './services/auth.service';
@@ -19,6 +19,7 @@ import { CommentComponent } from './comment/comment.component';
 import { CreateArticleComponent } from './create-article/create-article.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { CategoryComponent } from './category/category.component';
+import { UserArticlesListComponent } from './user-articles-list/user-articles-list.component';
 
 export function tokenGetter() {
   return localStorage.getItem(ACCESS_TOKEN_KEY);
@@ -27,15 +28,16 @@ export function tokenGetter() {
 @NgModule({
   declarations: [
     AppComponent,
-    PropertyCardComponent,
-    PropertyListComponent,
+    ArticleCardComponent,
+    ArticlesListComponent,
     NavBarComponent,
     LoginComponent,
     ArticleComponent,
     CreateArticleComponent,
     CommentComponent,
     RegistrationComponent,
-    CategoryComponent
+    CategoryComponent,
+    UserArticlesListComponent
    ],
   imports: [
     CommonModule,

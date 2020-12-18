@@ -4,14 +4,14 @@ import { CategoryModel } from 'src/app/models/category.model';
 import { ImageModel } from 'src/app/models/image.model';
 import { CategoryService } from 'src/app/services/category.service';
 import { ImageService } from 'src/app/services/image.service';
-import { ArticleModel } from '../../models/article.model'
+import { ArticleModel } from '../models/article.model'
 
 @Component({
-  selector: 'app-property-card',
-  templateUrl: 'property-card.component.html',
-  styleUrls: ['property-card.component.css']
+  selector: 'app-article-card',
+  templateUrl: 'article-card.component.html',
+  styleUrls: ['article-card.component.css']
 })
-export class PropertyCardComponent implements OnInit{
+export class ArticleCardComponent implements OnInit{
   @Input() article: ArticleModel
   categories: CategoryModel[] = []
   images: ImageModel[]= []

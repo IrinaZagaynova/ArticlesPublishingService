@@ -35,5 +35,9 @@ export class ArticleService {
     return this.http.get<ArticleModel[]>(this.apiUrl + `api/Article/articles-by-author?login=${author}`)
   }
 
+  getUserArticles() {
+    return this.http.get<ArticleModel[]>(this.apiUrl + `api/Article/get-user-articles`);
+  }
+
 }
 
