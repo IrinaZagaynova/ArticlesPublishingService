@@ -1,5 +1,6 @@
 ﻿using ArticlesService.Domain.Dto;
 using ArticlesService.Domain.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -33,6 +34,7 @@ namespace ArticlesService.API.Controllers
         }
 
         [HttpPost("create-comment")]
+        [Authorize]
         public IActionResult CreateComment(CreateCommentDto createCommentDto)
         {
             var userId = int.Parse(User.Claims.Single(c => c.Type == ClaimTypes.NameIdentifier).Value);

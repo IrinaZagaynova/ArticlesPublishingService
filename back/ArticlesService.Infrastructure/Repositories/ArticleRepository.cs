@@ -42,9 +42,14 @@ namespace ArticlesService.Infrastructure.Repositories
             return result;
         }
 
-        ArticleDto IArticleRepository.GetArticle(int articleId)
+        public Article GetArticle(int articleId)
         {
-            return GetArticleDto(_context.Articles.Include(a => a.User).Include(a => a.Categories).Include(a => a.Images).SingleOrDefault(a => a.Id == articleId));
+            return _context.Articles.Include(a => a.User).Include(a => a.Categories).Include(a => a.Images).SingleOrDefault(a => a.Id == articleId);
+        }
+
+        public ArticleDto GetArticleDto(int articleId)
+        {
+            return GetArticleDto(GetArticle(articleId));
         }
         public List<ArticleDto> GetArticlesByTitle(string title)
         {
@@ -103,6 +108,31 @@ namespace ArticlesService.Infrastructure.Repositories
             }
 
             return result;
+        }
+
+        public bool IsUserAuthorOfArticle(int userId, int articleId)
+        {
+            var articles = GetArticleByUserId(userId);
+
+            if (articles.Any(a => a.Id == articleId))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public void Delete(int articleId)
+        {
+            var article = GetArticle(articleId);
+
+            if (article == null)
+            {
+                throw new Exception();
+            }
+
+            _context.Remove(article);
+            _context.SaveChanges();
         }
     }
 }

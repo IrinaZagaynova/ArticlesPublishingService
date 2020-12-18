@@ -1,5 +1,6 @@
 ﻿using ArticlesService.Domain.Dto;
 using ArticlesService.Domain.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,7 @@ namespace ArticlesService.API.Controllers
         [HttpGet("article/{articleId}")]
         public IActionResult GetArticleById(int articleId)
         {
-            return Ok(_repository.GetArticle(articleId));            
+            return Ok(_repository.GetArticleDto(articleId));            
         }
 
         [HttpGet("articles-by-title")]
@@ -51,12 +52,33 @@ namespace ArticlesService.API.Controllers
         }
 
         [HttpGet("get-user-articles")]
+        [Authorize]
         public IActionResult GetUserArticles()
         {
             var userId = int.Parse(User.Claims.Single(c => c.Type == ClaimTypes.NameIdentifier).Value);
-            System.Console.WriteLine(userId);
             return Ok(_repository.GetArticleByUserId(userId));
         }
 
+        [HttpDelete("delete-own-article/{articleId}")]
+        [Authorize]
+        public IActionResult DeleteOwnArticle(int articleId)
+        {
+            var userId = int.Parse(User.Claims.Single(c => c.Type == ClaimTypes.NameIdentifier).Value);
+
+            if (!_repository.IsUserAuthorOfArticle(userId, articleId))
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                _repository.Delete(articleId);
+                return NoContent();
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
     }
 }

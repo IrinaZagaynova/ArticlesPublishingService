@@ -9,12 +9,14 @@ namespace ArticlesService.Domain.Interfaces
     public interface IArticleRepository
     {
         //void Create(Article article);
-        //void Delete(int id);
         List<ArticleDto> GetArticles();
-        ArticleDto GetArticle(int articleId);
+        Article GetArticle(int articleId);
+        ArticleDto GetArticleDto(int articleId);
         List<ArticleDto> GetArticlesByTitle(string title);
         List<ArticleDto> GetArticlesByAuthorLogin(string login);
         List<ArticleDto> GetArticlesByCategories(List<int> categories);
         List<ArticleDto> GetArticleByUserId(int userId);
+        bool IsUserAuthorOfArticle(int userId, int articleId);
+        void Delete(int articleId);
     }
 }
