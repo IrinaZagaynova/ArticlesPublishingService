@@ -18,7 +18,6 @@ import { ImageService } from '../services/image.service';
   styleUrls: ['./article.component.css'],
 })
 export class ArticleComponent implements OnInit{
-  @Output() update: EventEmitter<any> = new EventEmitter<any>()
   article: ArticleModel
   comments: CommentModel[] = []
   commentForm: FormGroup

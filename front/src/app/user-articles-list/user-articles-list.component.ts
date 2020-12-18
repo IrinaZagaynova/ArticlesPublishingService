@@ -24,4 +24,10 @@ export class UserArticlesListComponent implements OnInit {
       this.articles = data
     })
   }
+
+  deleteArticle(id: number) {
+    this.articleService.deleteArticle(id).subscribe(res => {
+      this.getArticlesByUser()
+    });
+  }
 }

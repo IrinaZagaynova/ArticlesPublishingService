@@ -4,7 +4,7 @@
       <h5>{{ article.title }}</h5>
       <p>{{ article.description }}</p>
       <button type="button" class="btn btn-dark btn-sm" routerLink="/article/{{article.id}}">Подробнее</button>
-      <button type="button" class="btn btn-dark btn-sm" >Удалить</button>
+      <button type="button" class="btn btn-dark btn-sm" (click)="deleteArticle(article.id)">Удалить</button>
       <hr>
     </div>
   </div>

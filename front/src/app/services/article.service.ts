@@ -23,7 +23,7 @@ export class ArticleService {
     })
   }
 
-  getArticleById(id) {
+  getArticleById(id: number) {
     return this.http.get<ArticleModel>(this.apiUrl + `api/Article/article/${id}`)
   }
 
@@ -37,6 +37,10 @@ export class ArticleService {
 
   getUserArticles() {
     return this.http.get<ArticleModel[]>(this.apiUrl + `api/Article/get-user-articles`);
+  }
+
+  deleteArticle(id: number) {
+    return this.http.delete(this.apiUrl +  `api/Article/delete-own-article/${id}`);
   }
 
 }
