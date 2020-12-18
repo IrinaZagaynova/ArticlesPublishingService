@@ -8,6 +8,8 @@
   border-radius: 3px;
   font-size: 20px;
   display: inline-flex;
+  margin: 15px 10px 0 0;
+  width: 35%;
 }
 
 .form-control
@@ -19,4 +21,9 @@
 .fas.fa-search{
   color: #ccc;
   padding: 10px;
+}
+
+.search-by-title
+{
+  margin: 10px;
 }
