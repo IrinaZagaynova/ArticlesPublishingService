@@ -9,7 +9,8 @@ import { AuthService } from '../services/auth.service';
 export class NavBarComponent {
   constructor(
     private authService: AuthService
-  ) { }
+  ) {
+  }
 
   public get isLoggedIn(): boolean{
     return this.authService.isAuthenticated()
@@ -17,6 +18,7 @@ export class NavBarComponent {
 
   logout() {
     this.authService.logout();
+    location.reload()
   }
 
 }

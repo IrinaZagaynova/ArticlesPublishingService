@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace ArticlesService.Domain.Models
+namespace ArticlesService.Domain.Dto
 {
-    public class Login
+    public class UserDto
     {
-        [Required]
-        [EmailAddress]
+        public string Login { get; set; }
         public string EMail { get; set; }
-
-        [Required]
+        public string Name { get; set; }
         public string Password { get; set; }
     }
 }

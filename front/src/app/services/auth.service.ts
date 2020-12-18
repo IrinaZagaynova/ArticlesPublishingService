@@ -30,6 +30,16 @@ export class AuthService {
     )
   }
 
+  register(login: string, email: string, name: string, password: string): Observable<Token> {
+    return this.http.post<Token>(`${this.apiUrl}api/auth/register`, {
+      login, email, name, password
+    }).pipe(
+      tap(token => {
+        localStorage.setItem(ACCESS_TOKEN_KEY, token.access_token);
+      })
+    )
+  }
+
   isAuthenticated(): boolean {
     var token = localStorage.getItem(ACCESS_TOKEN_KEY);
     return token && !this.jwtHelper.isTokenExpired(token)

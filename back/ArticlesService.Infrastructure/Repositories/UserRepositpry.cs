@@ -1,4 +1,5 @@
-﻿using ArticlesService.Domain.Interfaces;
+﻿using ArticlesService.Domain.Dto;
+using ArticlesService.Domain.Interfaces;
 using ArticlesService.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -18,7 +19,28 @@ namespace ArticlesService.Infrastructure.Repositories
 
         public User GetUser(Login login)
         {
-            return _context.Users.SingleOrDefault(u => u.EMail == login.Email && u.Password == login.Password);
+            return _context.Users.SingleOrDefault(u => u.EMail == login.EMail && u.Password == login.Password);
+        }
+
+        public User Register(UserDto userDto)
+        {
+            if (_context.Users.Any(u => u.EMail == userDto.EMail || u.Login == userDto.Login))
+            {
+                return null;
+            }
+
+            var user = new User
+            {
+                EMail = userDto.EMail,
+                Login = userDto.Login,
+                Name = userDto.Name,
+                Password = userDto.Password
+            };
+
+            _context.Add(user);
+            _context.SaveChanges();
+
+            return user;
         }
 
     }

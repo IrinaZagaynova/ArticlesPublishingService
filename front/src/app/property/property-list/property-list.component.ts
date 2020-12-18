@@ -12,7 +12,8 @@ export class PropertyListComponent implements OnInit{
   title: string = ''
   author: string = ''
 
-  constructor(private articleService: ArticleService,) {}
+  constructor(private articleService: ArticleService,) {
+  }
 
   public ngOnInit() {
     this.articleService.articles.subscribe(data => {

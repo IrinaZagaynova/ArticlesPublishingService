@@ -16,9 +16,9 @@
       </li>
     </ul>
     <button class="btn btn-outline-dark" type="button" [routerLink]="['/login']" *ngIf='!isLoggedIn'>Sign in</button>
-    <button class="btn btn-outline-dark" type="button" *ngIf='isLoggedIn' (click)='logout()' >Sign out</button>
+    <button class="btn btn-outline-dark" type="button" *ngIf='isLoggedIn' (click)='logout()'>Sign out</button>
     <div class="sign-up-button">
-      <button class="btn btn-dark" type="button" *ngIf='!isLoggedIn' >Sign up</button>
+      <button class="btn btn-dark" type="button" [routerLink]="['/registration']" *ngIf='!isLoggedIn' >Sign up</button>
     </div>
   </div>
 </nav>
