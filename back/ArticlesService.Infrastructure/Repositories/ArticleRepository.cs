@@ -134,5 +134,31 @@ namespace ArticlesService.Infrastructure.Repositories
             _context.Remove(article);
             _context.SaveChanges();
         }
+
+        public void Create(CreateArticleDto createArticleDto, User user)
+        {
+            var article = new Article
+            {
+                Title = createArticleDto.Title,
+                Description = createArticleDto.Description,
+                Content = createArticleDto.Content,
+                User = user
+            };
+
+            _context.Add(article);
+            _context.SaveChanges();
+
+            var id = article.Id;
+
+            if (createArticleDto.CategoryIds.Count() != 0)
+            {
+                foreach (var categoryId in createArticleDto.CategoryIds)
+                {
+                    _context.Add(new ArticleCategory { ArticleId = article.Id, CategoryId = categoryId });
+                }
+            }
+
+            _context.SaveChanges();
+        }
     }
 }

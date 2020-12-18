@@ -8,7 +8,6 @@ namespace ArticlesService.Domain.Interfaces
 {
     public interface IArticleRepository
     {
-        //void Create(Article article);
         List<ArticleDto> GetArticles();
         Article GetArticle(int articleId);
         ArticleDto GetArticleDto(int articleId);
@@ -18,5 +17,6 @@ namespace ArticlesService.Domain.Interfaces
         List<ArticleDto> GetArticleByUserId(int userId);
         bool IsUserAuthorOfArticle(int userId, int articleId);
         void Delete(int articleId);
+        void Create(CreateArticleDto createArticleDto, User user);
     }
 }

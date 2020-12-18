@@ -14,41 +14,43 @@ namespace ArticlesService.API.Controllers
     [ApiController]
     public class ArticleController : Controller
     {
-        private readonly IArticleRepository _repository;
+        private readonly IArticleRepository _articleRepository;
+        private readonly IUserRepository _userRepository;
 
-        public ArticleController(IArticleRepository repository)
+        public ArticleController(IArticleRepository articleRepository, IUserRepository userRepository)
         {
-            _repository = repository;
+            _articleRepository = articleRepository;
+            _userRepository = userRepository;
         }
 
         [HttpGet("articles")]
         public IActionResult GetArticles()
         {
-            return Ok(_repository.GetArticles());
+            return Ok(_articleRepository.GetArticles());
         }
 
         [HttpGet("article/{articleId}")]
         public IActionResult GetArticleById(int articleId)
         {
-            return Ok(_repository.GetArticleDto(articleId));            
+            return Ok(_articleRepository.GetArticleDto(articleId));            
         }
 
         [HttpGet("articles-by-title")]
         public IActionResult GetArticlesByTitle(string title)
         {
-            return Ok(_repository.GetArticlesByTitle(title));
+            return Ok(_articleRepository.GetArticlesByTitle(title));
         }
 
         [HttpGet("articles-by-author")]
         public IActionResult GetArticlesByAuthorLogin(string login)
         {
-            return Ok(_repository.GetArticlesByAuthorLogin(login));
+            return Ok(_articleRepository.GetArticlesByAuthorLogin(login));
         }
 
         [HttpPost("articles-by-categories")]
         public IActionResult GetArticlesByCategories(List<int> categories)
         {
-            return Ok(_repository.GetArticlesByCategories(categories));
+            return Ok(_articleRepository.GetArticlesByCategories(categories));
         }
 
         [HttpGet("get-user-articles")]
@@ -56,7 +58,7 @@ namespace ArticlesService.API.Controllers
         public IActionResult GetUserArticles()
         {
             var userId = int.Parse(User.Claims.Single(c => c.Type == ClaimTypes.NameIdentifier).Value);
-            return Ok(_repository.GetArticleByUserId(userId));
+            return Ok(_articleRepository.GetArticleByUserId(userId));
         }
 
         [HttpDelete("delete-own-article/{articleId}")]
@@ -65,15 +67,32 @@ namespace ArticlesService.API.Controllers
         {
             var userId = int.Parse(User.Claims.Single(c => c.Type == ClaimTypes.NameIdentifier).Value);
 
-            if (!_repository.IsUserAuthorOfArticle(userId, articleId))
+            if (!_articleRepository.IsUserAuthorOfArticle(userId, articleId))
             {
                 return BadRequest();
             }
 
             try
             {
-                _repository.Delete(articleId);
+                _articleRepository.Delete(articleId);
                 return NoContent();
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpPost("create-article")]
+        [Authorize]
+        public IActionResult CreateArticle(CreateArticleDto createArticleDto)
+        {
+            var userId = int.Parse(User.Claims.Single(c => c.Type == ClaimTypes.NameIdentifier).Value);
+
+            try
+            {
+                _articleRepository.Create(createArticleDto, _userRepository.GetUserById(userId));
+                return Ok();
             }
             catch (Exception)
             {

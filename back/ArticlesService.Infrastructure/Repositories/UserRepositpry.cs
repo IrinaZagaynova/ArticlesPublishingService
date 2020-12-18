@@ -22,6 +22,11 @@ namespace ArticlesService.Infrastructure.Repositories
             return _context.Users.SingleOrDefault(u => u.EMail == login.EMail && u.Password == login.Password);
         }
 
+        public User GetUserById(int id)
+        {
+            return _context.Users.SingleOrDefault(u => u.Id == id);
+        }
+
         public User Register(UserDto userDto)
         {
             if (_context.Users.Any(u => u.EMail == userDto.EMail || u.Login == userDto.Login))
