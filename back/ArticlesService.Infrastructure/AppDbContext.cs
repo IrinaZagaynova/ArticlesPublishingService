@@ -1,5 +1,8 @@
 ﻿using ArticlesService.Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
+using Microsoft.Extensions.Logging.Debug;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,5 +19,6 @@ namespace ArticlesService.Infrastructure
         public DbSet<Image> Images { get; set; }
         public DbSet<ArticleCategory> ArticleCategories { get; set; }
         public DbSet<ArticleImage> ArticleImages { get; set; }
+
     }
 }
