@@ -9,7 +9,6 @@ namespace ArticlesService.Domain.Interfaces
     public interface IArticleRepository
     {
         List<ArticleDto> GetArticles();
-        Article GetArticle(int articleId);
         ArticleDto GetArticleDto(int articleId);
         List<ArticleDto> GetArticlesByTitle(string title);
         List<ArticleDto> GetArticlesByAuthorLogin(string login);

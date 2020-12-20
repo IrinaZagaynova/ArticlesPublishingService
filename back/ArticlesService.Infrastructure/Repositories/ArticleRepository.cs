@@ -17,6 +17,18 @@ namespace ArticlesService.Infrastructure.Repositories
             _context = context;
         }
 
+        List<ArticleDto> IArticleRepository.GetArticles()
+        {
+            return _context.Articles.Include(a => a.User)
+                .Select(a => new ArticleDto
+                {
+                    Id = a.Id,
+                    Title = a.Title,
+                    Description = a.Description,
+                    Content = a.Content,
+                    UserLogin = a.User.Login
+                }).ToList();
+        }
         private ArticleDto GetArticleDto(Article article)
         {
             return new ArticleDto()
@@ -29,68 +41,50 @@ namespace ArticlesService.Infrastructure.Repositories
             };
         }
 
-        List<ArticleDto> IArticleRepository.GetArticles()
-        {
-            var articles = _context.Articles.Include(a => a.User).Include(a => a.Categories).Include(a => a.Images);
-            var result = new List<ArticleDto>();
-
-            foreach (var article in articles)
-            {
-                result.Add(GetArticleDto(article));
-            }
-            
-            return result;
-        }
-
-        public Article GetArticle(int articleId)
-        {
-            return _context.Articles.Include(a => a.User).Include(a => a.Categories).Include(a => a.Images).SingleOrDefault(a => a.Id == articleId);
-        }
-
         public ArticleDto GetArticleDto(int articleId)
         {
-            return GetArticleDto(GetArticle(articleId));
+            return GetArticleDto(_context.Articles.Include(a => a.User).SingleOrDefault(a => a.Id == articleId));
         }
         public List<ArticleDto> GetArticlesByTitle(string title)
         {
-            var articles = _context.Articles.Include(a => a.User).Where(a => a.Title.Contains(title));
-            var result = new List<ArticleDto>();
+            return _context.Articles.Include(a => a.User).Where(a => a.Title.Contains(title))
+                .Select(a => new ArticleDto
+                {
+                    Id = a.Id,
+                    Title = a.Title,
+                    Description = a.Description,
+                    Content = a.Content,
+                    UserLogin = a.User.Login
+                }).ToList();
 
-            foreach (var article in articles)
-            {
-                result.Add(GetArticleDto(article));
-            }
-
-            return result;
         }
 
         public List<ArticleDto> GetArticlesByAuthorLogin(string login)
         {
-            var articles = _context.Articles.Include(a => a.User).Where(a => a.User.Login.Contains(login));
-            var result = new List<ArticleDto>();
-
-            foreach (var article in articles)
-            {
-                result.Add(GetArticleDto(article));
-            }
-
-            return result;
+            return _context.Articles.Include(a => a.User).Where(a => a.User.Login.Contains(login))
+                .Select(a => new ArticleDto
+                {
+                    Id = a.Id,
+                    Title = a.Title,
+                    Description = a.Description,
+                    Content = a.Content,
+                    UserLogin = a.User.Login
+                }).ToList();
         }
 
         public List<ArticleDto> GetArticlesByCategories(List<int> categories)
         {
-            var articles = _context.Articles.Include(a => a.User).Include(a => a.Categories).Include(a => a.Images);
+            var articles = _context.Articles.Include(a => a.User).Include(a => a.ArticleCategories);
             var result = new List<ArticleDto>();
 
             foreach (var article in articles)
             {
-                foreach (var categody in categories)
+                var categoryIds = article.ArticleCategories
+                    .Select(a => a.CategoryId).ToList();
+
+                if (categories.All(categoryIds.Contains))
                 {
-                    if (article.Categories.Any(c => c.CategoryId == categody))
-                    {
-                        result.Add(GetArticleDto(article));
-                        break;
-                    }
+                    result.Add(GetArticleDto(article));
                 }
             }
 
@@ -99,15 +93,15 @@ namespace ArticlesService.Infrastructure.Repositories
 
         public List<ArticleDto> GetArticleByUserId(int userId)
         {
-            var articles = _context.Articles.Include(a => a.User).Where(a => a.User.Id == userId);
-            var result = new List<ArticleDto>();
-
-            foreach (var article in articles)
-            {
-                result.Add(GetArticleDto(article));
-            }
-
-            return result;
+            return _context.Articles.Include(a => a.User).Where(a => a.User.Id == userId)
+                .Select(a => new ArticleDto
+                {
+                    Id = a.Id,
+                    Title = a.Title,
+                    Description = a.Description,
+                    Content = a.Content,
+                    UserLogin = a.User.Login
+                }).ToList();
         }
 
         public bool IsUserAuthorOfArticle(int userId, int articleId)
@@ -124,7 +118,7 @@ namespace ArticlesService.Infrastructure.Repositories
 
         public void Delete(int articleId)
         {
-            var article = GetArticle(articleId);
+            var article = _context.Articles.Include(a => a.User).Include(a => a.ArticleCategories).Include(a => a.ArticleImages).SingleOrDefault(a => a.Id == articleId);
 
             if (article == null)
             {
@@ -147,8 +141,6 @@ namespace ArticlesService.Infrastructure.Repositories
 
             _context.Add(article);
             _context.SaveChanges();
-
-            var id = article.Id;
 
             if (createArticleDto.CategoryIds.Count() != 0)
             {

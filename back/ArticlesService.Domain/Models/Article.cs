@@ -21,8 +21,10 @@ namespace ArticlesService.Domain.Models
         [Column("content")]
         public string Content { get; set; }
         [Column("id_user")]
+        public int UserId { get; set; }
         public User User { get; set; }
-        public List<ArticleCategory> Categories { get; set; } = new List<ArticleCategory>();
-        public List<ArticleImage> Images { get; set; } = new List<ArticleImage>();
+        public List<Comment> Comments { get; set; } = new List<Comment>();
+        public List<ArticleCategory> ArticleCategories { get; set; } = new List<ArticleCategory>();
+        public List<ArticleImage> ArticleImages { get; set; } = new List<ArticleImage>();
     }
 }

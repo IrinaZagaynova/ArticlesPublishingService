@@ -20,7 +20,7 @@ namespace ArticlesService.Infrastructure.Repositories
 
         public List<CategoryDto> GetCategories(int articleId)
         {
-            return _context.Categories.Include(c => c.Categories).Where(a => a.Categories.Any(c => c.ArticleId == articleId))
+            return _context.Categories.Include(c => c.ArticleCategories).Where(a => a.ArticleCategories.Any(c => c.ArticleId == articleId))
                 .Select(c => new CategoryDto
                 {
                     Id = c.Id,

@@ -30,15 +30,13 @@ namespace ArticlesService.Infrastructure.Repositories
 
         public List<CommentDto> GetComments(int articleId)
         {
-            var comments = _context.Comments.Include(c => c.User).Where(c => c.ArticleId == articleId);
-            var result = new List<CommentDto>();
-
-            foreach (var comment in comments)
-            {
-                result.Add(GetCommentDto(comment));
-            }
-
-            return result;           
+            return _context.Comments.Include(c => c.User).Where(c => c.ArticleId == articleId)
+                .Select(c => new CommentDto
+                {
+                    Id = c.Id,
+                    Login = c.User.Login,
+                    Text = c.Text
+                }).ToList();        
         }
 
         public int GetCommentsCount(int articleId)

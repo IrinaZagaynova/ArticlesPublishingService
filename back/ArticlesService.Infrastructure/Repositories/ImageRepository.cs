@@ -19,7 +19,7 @@ namespace ArticlesService.Infrastructure.Repositories
 
         public List<ImageDto> GetImages(int articleId)
         {
-            return _context.Images.Include(i => i.Images).Where(a => a.Images.Any(i => i.ArticleId == articleId))
+            return _context.Images.Include(i => i.ArticleImages).Where(a => a.ArticleImages.Any(i => i.ArticleId == articleId))
                 .Select(i => new ImageDto
                 {
                     Id = i.Id,

@@ -22,5 +22,7 @@ namespace ArticlesService.Domain.Models
         [Required]
         [Column("password")]
         public string Password { get; set; }
+        public List<Comment> Comments { get; set; } = new List<Comment>();
+        public List<Article> Articles { get; set; } = new List<Article>();
     }
 }

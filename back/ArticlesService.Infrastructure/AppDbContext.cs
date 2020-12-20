@@ -1,11 +1,5 @@
 ﻿using ArticlesService.Domain.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Console;
-using Microsoft.Extensions.Logging.Debug;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ArticlesService.Infrastructure
 {
@@ -17,8 +11,14 @@ namespace ArticlesService.Infrastructure
         public DbSet<Category> Categories { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Image> Images { get; set; }
-        public DbSet<ArticleCategory> ArticleCategories { get; set; }
-        public DbSet<ArticleImage> ArticleImages { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {                        
+            modelBuilder.Entity<Article>()
+                        .HasOne(a => a.User)
+                        .WithMany(u => u.Articles)
+                        .HasForeignKey(a => a.UserId)
+                        .OnDelete(DeleteBehavior.Restrict);
+        }
     }
 }

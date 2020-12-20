@@ -14,6 +14,6 @@ namespace ArticlesService.Domain.Models
         [Required]
         [Column("title")]
         public string Title { get; set; }
-        public List<ArticleCategory> Categories { get; set; } = new List<ArticleCategory>();
+        public List<ArticleCategory> ArticleCategories { get; set; } = new List<ArticleCategory>();
     }
 }

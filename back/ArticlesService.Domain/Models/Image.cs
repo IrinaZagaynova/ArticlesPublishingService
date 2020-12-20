@@ -14,6 +14,6 @@ namespace ArticlesService.Domain.Models
         [Required]
         [Column("name")]
         public string Name { get; set; }
-        public List<ArticleImage> Images { get; set; } = new List<ArticleImage>();
+        public List<ArticleImage> ArticleImages { get; set; } = new List<ArticleImage>();
     }
 }
