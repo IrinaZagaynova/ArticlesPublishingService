@@ -12,7 +12,7 @@ namespace ArticlesService.Domain.Models
         [Column("id_image")]
         public int Id { get; set; }
         [Required]
-        [Column("name")]
+        [Column("name", TypeName = "varchar(200)")]
         public string Name { get; set; }
         public List<ArticleImage> ArticleImages { get; set; } = new List<ArticleImage>();
     }
