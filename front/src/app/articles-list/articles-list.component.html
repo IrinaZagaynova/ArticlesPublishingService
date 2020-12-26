@@ -1,18 +1,29 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
 
 <div class="common">
-  <form class="search-in-articles">
-    <input class="form-control" id="title" [(ngModel)]="title" name="title" placeholder="Title">
-    <i class="fas fa-search" type="submit" (click)="getArticlesByTitle()"></i>
-  </form>
-  <form class="search-in-articles">
-    <input class="form-control" id="author" [(ngModel)]="author" name="author" placeholder="Author">
-    <i class="fas fa-search" type="submit" (click)="getArticlesByAutor()"></i>
-  </form>
+  <div class="seach-block">
+    <form class="search-in-articles">
+      <input class="form-control" id="title" [(ngModel)]="title" name="title" placeholder="Title">
+      <i class="fas fa-search" type="submit" (click)="getArticlesByTitle()"></i>
+    </form>
+    <form class="search-in-articles">
+      <input class="form-control" id="author" [(ngModel)]="author" name="author" placeholder="Author">
+      <i class="fas fa-search" type="submit" (click)="getArticlesByAutor()"></i>
+    </form>
+    <div class="categories-list row">
+      <label>Карегории</label>
+      <div *ngFor="let category of categories, index as i">
+        <input #checkboxes type="checkbox" [(ngModel)]="category[i]" (ngModelChange)="addSelected(category, $event)"/>
+        {{category.title}}
+      </div>
+    </div>
+    <button type="button" class="btn btn-dark btn-sm" id="discard-seach-button" (click)="getArticlesByCategories()" onclick="this.blur()">Применить</button>
+    <button type="button" class="btn btn-dark btn-sm" id="discard-seach-button" (click)="discardSearch()" onclick="this.blur()">Сбросить</button>
+  </div>
   <div class="articles-list row">
     <div class="col-md-12">
       <div *ngFor="let article of articles" class="article">
-       <app-article-card [article]="article"></app-article-card>
+        <app-article-card [article]="article"></app-article-card>
       </div>
     </div>
   </div>

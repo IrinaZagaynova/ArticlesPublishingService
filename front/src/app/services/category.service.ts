@@ -23,5 +23,8 @@ export class CategoryService {
     return this.http.get<CategoryModel[]>(this.apiUrl + `api/Category/categories/${articleId}`)
   }
 
+  getAllCategories() {
+    return this.http.get<CategoryModel[]>(this.apiUrl + `api/Category/all-categories`)
+  }
 }
 

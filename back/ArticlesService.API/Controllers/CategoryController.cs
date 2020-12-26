@@ -21,7 +21,13 @@ namespace ArticlesService.API.Controllers
         [HttpGet("categories/{articleId}")]
         public IActionResult GetCategories(int articleId)
         {
-            return Ok(_repository.GetCategories(articleId));
+            return Ok(_repository.GetArtilceCategories(articleId));
+        }
+
+        [HttpGet("all-categories")]
+        public IActionResult GetAllCategories()
+        {
+            return Ok(_repository.GetCategories());
         }
     }
 }

@@ -3,27 +3,49 @@
   margin: 0 25% 0;
 }
 
-.search-in-articles{
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  font-size: 20px;
-  display: inline-flex;
-  margin: 15px 10px 0 0;
-  width: 35%;
+.search-in-articles
+{
+  font-size: 16px;
+  display: flex;
+  margin: 10px 10px 0 0;
+  width: 50%;
+  background-color:#ccc;
+  border-radius: 4px;
+}
+
+#discard-seach-button
+{
+  margin-right: 10px;
 }
 
 .form-control
 {
+  border-radius: 4px 0 0 4px;
   box-shadow: none;
-  border: none;
+  font-size: 16px;
 }
 
-.fas.fa-search{
-  color: #ccc;
-  padding: 10px;
+.fas.fa-search
+{
+  color: gray;
+  padding: 11px;
+  border-radius: 0 4px 4px 0;
+}
+
+.fas.fa-search:hover
+{
+  background-color: silver;
+  color: rgb(68, 68, 68);
 }
 
 .search-by-title
 {
   margin: 10px;
 }
+
+.categories-list
+{
+  display: table;
+  margin: 10px 0 15px;
+}
+

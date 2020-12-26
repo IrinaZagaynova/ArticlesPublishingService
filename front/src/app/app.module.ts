@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { AppComponent } from './app.component';
 import { ArticleCardComponent } from './article-card/article-card.component';
@@ -37,7 +38,7 @@ export function tokenGetter() {
     CommentComponent,
     RegistrationComponent,
     CategoryComponent,
-    UserArticlesListComponent
+    UserArticlesListComponent,
    ],
   imports: [
     CommonModule,
@@ -47,6 +48,7 @@ export function tokenGetter() {
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    MatCheckboxModule,
 
     JwtModule.forRoot({
       config: {

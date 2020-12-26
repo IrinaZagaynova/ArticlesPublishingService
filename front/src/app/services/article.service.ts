@@ -1,7 +1,7 @@
 import { Inject, Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ArticleModel } from '../models/article.model';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpParams } from '@angular/common/http'
 import { API_URL } from '../app-injection-tokens';
 import { Router } from '@angular/router';
 
@@ -43,5 +43,12 @@ export class ArticleService {
     return this.http.delete(this.apiUrl +  `api/Article/delete-own-article/${id}`);
   }
 
+  createArticle(title: string, description: string, content: string, categoriesResult: number[]) {
+    return this.http.post(this.apiUrl + `api/Article/create-article`, {title, description, content, categoryIds: categoriesResult});
+  }
+
+  getArticlesByCategories(categoriesResult: number[]) {
+    return this.http.post<ArticleModel[]>(this.apiUrl + `api/Article/articles-by-categories`, categoriesResult)
+  }
 }
 

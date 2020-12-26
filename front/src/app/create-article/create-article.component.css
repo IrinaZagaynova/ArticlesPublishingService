@@ -1,0 +1,22 @@
+.create-article-block
+{
+  margin: 10px 25% 0;
+}
+
+#description
+{
+  resize: none;
+  height: 90px;
+}
+
+#content
+{
+  resize: none;
+  height: 220px;
+}
+
+.categories-list
+{
+  display: table;
+  margin: 0 0 15px;
+}

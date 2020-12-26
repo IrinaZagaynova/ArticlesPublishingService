@@ -37,7 +37,7 @@
       <textarea class="form-control" id="comment" [(ngModel)]="text" name="text"></textarea>
     </div>
     <div class="form-group">
-      <button class="btn btn-primary" name="add-comment-button" type="submit" (click)="createComment()">Добавить</button>
+      <button class="btn btn-primary" name="add-comment-button" type="submit" (click)="createComment()" onclick="this.blur()">Добавить</button>
     </div>
   </form>
   <div class="comments-list row">

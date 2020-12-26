@@ -57,7 +57,7 @@ export class ArticleComponent implements OnInit{
   createComment() {
     if (!this.text)
     {
-      alert("Комментарий не может быть пустым.")
+      alert("Комментарий не может быть пустым")
       return
     }
 
@@ -66,7 +66,7 @@ export class ArticleComponent implements OnInit{
       this.getComments()
       this.text = "";
     }, error => {
-      alert("Не удалось добавить комментарий.")
+      alert("Не удалось добавить комментарий")
     })
   }
 
