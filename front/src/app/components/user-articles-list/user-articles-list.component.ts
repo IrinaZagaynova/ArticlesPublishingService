@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ArticleModel } from '../models/article.model';
-import { ArticleService } from '../services/article.service';
+import { ArticleModel } from '../../models/article.model';
+import { ArticleService } from '../../services/article.service';
 
 @Component({
   selector: 'app-user-articles-list',

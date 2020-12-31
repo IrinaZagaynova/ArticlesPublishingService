@@ -5,7 +5,7 @@ import { ArticlesListComponent } from './components/articles-list/articles-list.
 import { ArticleComponent } from './components/article/article.component';
 import { CreateArticleComponent } from './components/create-article/create-article.component';
 import { RegistrationComponent } from './components/registration/registration.component';
-import { UserArticlesListComponent } from './user-articles-list/user-articles-list.component';
+import { UserArticlesListComponent } from './components/user-articles-list/user-articles-list.component';
 
 const routes: Routes = [
   { path: '', component: ArticlesListComponent},

@@ -20,7 +20,7 @@ import { CommentComponent } from './components/comment/comment.component';
 import { CreateArticleComponent } from './components/create-article/create-article.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { CategoryComponent } from './components/category/category.component';
-import { UserArticlesListComponent } from './user-articles-list/user-articles-list.component';
+import { UserArticlesListComponent } from './components/user-articles-list/user-articles-list.component';
 
 export function tokenGetter() {
   return localStorage.getItem(ACCESS_TOKEN_KEY);
