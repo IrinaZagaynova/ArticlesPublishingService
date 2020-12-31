@@ -12,6 +12,6 @@ namespace ArticlesService.Domain.Dto
         public string Description { get; set; }
         public string Content { get; set; }
         public List<int> CategoryIds { get; set; }
-        //public List<string> ImageNames { get; set; }
+        public List<int> ImageIds { get; set; }
     }
 }

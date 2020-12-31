@@ -2,10 +2,10 @@ import { QueryList } from '@angular/core';
 import { ElementRef } from '@angular/core';
 import { ViewChildren } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
-import { ArticleModel } from '../models/article.model'
-import { CategoryModel } from '../models/category.model';
-import { ArticleService} from '../services/article.service'
-import { CategoryService } from '../services/category.service';
+import { ArticleModel } from '../../models/article.model'
+import { CategoryModel } from '../../models/category.model';
+import { ArticleService} from '../../services/article.service'
+import { CategoryService } from '../../services/category.service';
 
 @Component({
   selector: 'app-articles-list',

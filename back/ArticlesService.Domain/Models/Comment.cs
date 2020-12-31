@@ -20,7 +20,7 @@ namespace ArticlesService.Domain.Models
         public int UserId { get; set; }
         public User User { get; set; }
         [Required]
-        [Column("text", TypeName = "varchar(200)")]
+        [Column("text", TypeName = "nvarchar(200)")]
         public string Text { get; set; }
     }
 }

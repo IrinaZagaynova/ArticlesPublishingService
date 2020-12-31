@@ -1,8 +1,11 @@
 ﻿using ArticlesService.Domain.Dto;
 using ArticlesService.Domain.Interfaces;
+using ArticlesService.Domain.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -27,5 +30,19 @@ namespace ArticlesService.Infrastructure.Repositories
                 })
                 .ToList();
         }
+
+
+        public int AddImage(string name)
+        {
+            var image = new Image
+            {
+                Name = name
+            };
+
+            _context.Add(image);
+            _context.SaveChanges();
+
+            return image.Id;
+        }       
     }
 }

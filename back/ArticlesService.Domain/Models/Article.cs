@@ -12,7 +12,7 @@ namespace ArticlesService.Domain.Models
         [Column("id_article")]
         public int Id { get; set; }
         [Required]
-        [Column("title", TypeName = "varchar(200)")]
+        [Column("title", TypeName = "nvarchar(200)")]
         public string Title { get; set; }
         [Required]
         [Column("description")]

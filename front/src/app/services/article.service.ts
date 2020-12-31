@@ -43,8 +43,8 @@ export class ArticleService {
     return this.http.delete(this.apiUrl +  `api/Article/delete-own-article/${id}`);
   }
 
-  createArticle(title: string, description: string, content: string, categoriesResult: number[]) {
-    return this.http.post(this.apiUrl + `api/Article/create-article`, {title, description, content, categoryIds: categoriesResult});
+  createArticle(title: string, description: string, content: string, categoriesResult: number[], imageIds: number[]) {
+    return this.http.post(this.apiUrl + `api/Article/create-article`, {title, description, content, categoryIds: categoriesResult, imageIds: imageIds});
   }
 
   getArticlesByCategories(categoriesResult: number[]) {

@@ -150,6 +150,14 @@ namespace ArticlesService.Infrastructure.Repositories
                 }
             }
 
+            if (createArticleDto.ImageIds.Count() != 0)
+            {
+                foreach (var imageId in createArticleDto.ImageIds)
+                {
+                    _context.Add(new ArticleImage { ArticleId = article.Id, ImageId = imageId });
+                }
+            }
+
             _context.SaveChanges();
         }
     }

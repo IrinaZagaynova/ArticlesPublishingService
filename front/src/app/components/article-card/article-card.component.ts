@@ -4,7 +4,7 @@ import { CategoryModel } from 'src/app/models/category.model';
 import { ImageModel } from 'src/app/models/image.model';
 import { CategoryService } from 'src/app/services/category.service';
 import { ImageService } from 'src/app/services/image.service';
-import { ArticleModel } from '../models/article.model'
+import { ArticleModel } from '../../models/article.model'
 
 @Component({
   selector: 'app-article-card',

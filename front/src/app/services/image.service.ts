@@ -1,7 +1,7 @@
-import { Inject, Injectable } from "@angular/core";
+import { EventEmitter, Inject, Injectable, Output } from "@angular/core";
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ImageModel } from '../models/image.model';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpEventType } from '@angular/common/http'
 import { API_URL } from '../app-injection-tokens';
 import { Router } from '@angular/router';
 
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 
 export class ImageService {
-  images: BehaviorSubject<ImageModel[]>;
+  images: BehaviorSubject<ImageModel[]>
 
   constructor(
     private http: HttpClient,
@@ -22,5 +22,9 @@ export class ImageService {
   getImages(articleId: number) {
     return this.http.get<ImageModel[]>(this.apiUrl + `api/Image/images/${articleId}`)
   }
+
+  public uploadImage(formData: FormData): Observable<number[]> {
+    return this.http.post<number[]>(this.apiUrl + `api/Image/upload`, formData);
+}
 
 }

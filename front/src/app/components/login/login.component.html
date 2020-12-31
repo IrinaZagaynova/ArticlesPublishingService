@@ -10,6 +10,7 @@
     </div>
     <div class="form-group">
         <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Войти</button>
+        <label class="registration-link-message">Нет аккаунта? <a [routerLink]="['/registration']">Зарегистрируйтесь</a></label>
     </div>
   </form>
 </div>

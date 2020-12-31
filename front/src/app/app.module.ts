@@ -7,19 +7,19 @@ import { CommonModule } from '@angular/common';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { AppComponent } from './app.component';
-import { ArticleCardComponent } from './article-card/article-card.component';
-import { ArticlesListComponent } from './articles-list/articles-list.component';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { ArticleCardComponent } from './components/article-card/article-card.component';
+import { ArticlesListComponent } from './components/articles-list/articles-list.component';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { environment } from 'src/environments/environment';
 import { ACCESS_TOKEN_KEY } from './services/auth.service';
 import { API_URL } from './app-injection-tokens';
 import { AppRoutingModule } from './app-routing.module';
-import { LoginComponent } from './login/login.component';
-import { ArticleComponent } from './article/article.component';
-import { CommentComponent } from './comment/comment.component';
-import { CreateArticleComponent } from './create-article/create-article.component';
-import { RegistrationComponent } from './registration/registration.component';
-import { CategoryComponent } from './category/category.component';
+import { LoginComponent } from './components/login/login.component';
+import { ArticleComponent } from './components/article/article.component';
+import { CommentComponent } from './components/comment/comment.component';
+import { CreateArticleComponent } from './components/create-article/create-article.component';
+import { RegistrationComponent } from './components/registration/registration.component';
+import { CategoryComponent } from './components/category/category.component';
 import { UserArticlesListComponent } from './user-articles-list/user-articles-list.component';
 
 export function tokenGetter() {

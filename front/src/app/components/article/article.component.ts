@@ -1,16 +1,16 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { ArticleModel } from '../models/article.model';
-import { CommentModel } from '../models/comment.model';
-import { CategoryModel } from '../models/category.model';
-import { ArticleService } from '../services/article.service';
-import { CommentService } from '../services/comment.service';
-import { CategoryService } from '../services/category.service';
-import { AuthService } from '../services/auth.service';
+import { ArticleModel } from '../../models/article.model';
+import { CommentModel } from '../../models/comment.model';
+import { CategoryModel } from '../../models/category.model';
+import { ArticleService } from '../../services/article.service';
+import { CommentService } from '../../services/comment.service';
+import { CategoryService } from '../../services/category.service';
+import { AuthService } from '../../services/auth.service';
 import { FormGroup } from '@angular/forms';
-import { ImageModel } from '../models/image.model';
-import { ImageService } from '../services/image.service';
+import { ImageModel } from '../../models/image.model';
+import { ImageService } from '../../services/image.service';
 
 @Component({
   selector: 'app-article',

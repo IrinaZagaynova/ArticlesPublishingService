@@ -12,15 +12,15 @@ namespace ArticlesService.Domain.Models
         [Column("id_user")]
         public int Id { get; set; }
         [Required]
-        [Column("login", TypeName = "varchar(50)")]
+        [Column("login", TypeName = "nvarchar(50)")]
         public string Login { get; set; }
         [Required]
-        [Column("email", TypeName = "varchar(50)")]
+        [Column("email", TypeName = "nvarchar(50)")]
         public string EMail { get; set; }
-        [Column("name", TypeName = "varchar(50)")]
+        [Column("name", TypeName = "nvarchar(50)")]
         public string Name { get; set; }
         [Required]
-        [Column("password", TypeName = "varchar(50)")]
+        [Column("password", TypeName = "nvarchar(50)")]
         public string Password { get; set; }
         public List<Comment> Comments { get; set; } = new List<Comment>();
         public List<Article> Articles { get; set; } = new List<Article>();
