@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ArticleCardModel } from 'src/app/models/article-card.model';
 import { CategoryModel } from 'src/app/models/category.model';
 import { ImageModel } from 'src/app/models/image.model';
 import { CategoryService } from 'src/app/services/category.service';
@@ -12,7 +13,7 @@ import { ArticleModel } from '../../models/article.model'
   styleUrls: ['article-card.component.css']
 })
 export class ArticleCardComponent implements OnInit{
-  @Input() article: ArticleModel
+  @Input() article: ArticleCardModel
   categories: CategoryModel[] = []
   images: ImageModel[]= []
 

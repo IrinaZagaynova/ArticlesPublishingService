@@ -19,6 +19,16 @@ namespace ArticlesService.Infrastructure
                         .WithMany(u => u.Articles)
                         .HasForeignKey(a => a.UserId)
                         .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<User>()
+               .HasIndex(u => u.Login)
+                .IsUnique(true);
+
+            modelBuilder.Entity<User>()
+                .HasIndex(u => u.EMail)
+                .IsUnique(true);
+              
+
         }
     }
 }

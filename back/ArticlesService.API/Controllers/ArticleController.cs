@@ -32,7 +32,7 @@ namespace ArticlesService.API.Controllers
         [HttpGet("article/{articleId}")]
         public IActionResult GetArticleById(int articleId)
         {
-            return Ok(_articleRepository.GetArticleDto(articleId));            
+            return Ok(_articleRepository.GetArticle(articleId));            
         }
 
         [HttpGet("articles-by-title")]
@@ -54,10 +54,11 @@ namespace ArticlesService.API.Controllers
         }
 
         [HttpGet("get-user-articles")]
-        [Authorize]
+        //[Authorize]
         public IActionResult GetUserArticles()
         {
-            var userId = int.Parse(User.Claims.Single(c => c.Type == ClaimTypes.NameIdentifier).Value);
+            //var userId = int.Parse(User.Claims.Single(c => c.Type == ClaimTypes.NameIdentifier).Value);
+            var userId = 1;
             return Ok(_articleRepository.GetArticleByUserId(userId));
         }
 

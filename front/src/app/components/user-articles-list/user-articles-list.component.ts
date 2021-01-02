@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ArticleModel } from '../../models/article.model';
+import { UserArticleCardModel } from 'src/app/models/user-article-card.mode';
 import { ArticleService } from '../../services/article.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { ArticleService } from '../../services/article.service';
   styleUrls: ['./user-articles-list.component.css']
 })
 export class UserArticlesListComponent implements OnInit {
-  articles: ArticleModel[] = [];
+  articles: UserArticleCardModel[] = []
 
   constructor(
     private articleService: ArticleService
@@ -28,6 +28,6 @@ export class UserArticlesListComponent implements OnInit {
   deleteArticle(id: number) {
     this.articleService.deleteArticle(id).subscribe(res => {
       this.getArticlesByUser()
-    });
+    })
   }
 }

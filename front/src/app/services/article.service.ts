@@ -4,21 +4,23 @@ import { ArticleModel } from '../models/article.model';
 import { HttpClient, HttpParams } from '@angular/common/http'
 import { API_URL } from '../app-injection-tokens';
 import { Router } from '@angular/router';
+import { ArticleCardModel } from "../models/article-card.model";
+import { UserArticleCardModel } from "../models/user-article-card.mode";
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class ArticleService {
-  articles: BehaviorSubject<ArticleModel[]>;
+  articles: BehaviorSubject<ArticleCardModel[]>;
 
   constructor(
     private http: HttpClient,
     @Inject(API_URL) private apiUrl: string,
     private router: Router
   ) {
-    this.articles = new BehaviorSubject<ArticleModel[]>([]);
-    this.http.get<ArticleModel[]>(apiUrl + `api/Article/articles`).subscribe(data => {
+    this.articles = new BehaviorSubject<ArticleCardModel[]>([]);
+    this.http.get<ArticleCardModel[]>(apiUrl + `api/Article/articles`).subscribe(data => {
       this.articles.next(data);
     })
   }
@@ -28,15 +30,15 @@ export class ArticleService {
   }
 
   getAtriclesByTitle(title: string) {
-    return this.http.get<ArticleModel[]>(this.apiUrl + `api/Article/articles-by-title?title=${title}`)
+    return this.http.get<ArticleCardModel[]>(this.apiUrl + `api/Article/articles-by-title?title=${title}`)
   }
 
   getAtriclesByAuthor(author: string) {
-    return this.http.get<ArticleModel[]>(this.apiUrl + `api/Article/articles-by-author?login=${author}`)
+    return this.http.get<ArticleCardModel[]>(this.apiUrl + `api/Article/articles-by-author?login=${author}`)
   }
 
   getUserArticles() {
-    return this.http.get<ArticleModel[]>(this.apiUrl + `api/Article/get-user-articles`);
+    return this.http.get<UserArticleCardModel[]>(this.apiUrl + `api/Article/get-user-articles`);
   }
 
   deleteArticle(id: number) {
@@ -48,7 +50,7 @@ export class ArticleService {
   }
 
   getArticlesByCategories(categoriesResult: number[]) {
-    return this.http.post<ArticleModel[]>(this.apiUrl + `api/Article/articles-by-categories`, categoriesResult)
+    return this.http.post<ArticleCardModel[]>(this.apiUrl + `api/Article/articles-by-categories`, categoriesResult)
   }
 }
 

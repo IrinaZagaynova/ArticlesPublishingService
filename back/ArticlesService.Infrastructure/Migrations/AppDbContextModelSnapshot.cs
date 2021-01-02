@@ -197,6 +197,12 @@ namespace ArticlesService.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("EMail")
+                        .IsUnique();
+
+                    b.HasIndex("Login")
+                        .IsUnique();
+
                     b.ToTable("user");
                 });
 

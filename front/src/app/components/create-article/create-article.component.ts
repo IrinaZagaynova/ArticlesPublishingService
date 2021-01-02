@@ -1,8 +1,5 @@
-import { HttpClient } from '@angular/common/http';
-import { Output } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { EventEmitter } from 'events';
 import { CategoryModel } from '../../models/category.model';
 import { ArticleService } from '../../services/article.service';
 import { CategoryService} from '../../services/category.service';
@@ -36,13 +33,13 @@ export class CreateArticleComponent implements OnInit{
     this.getAllCategories()
     this.form = new FormGroup({
       Files: new FormControl(null)
-    });
+    })
   }
 
   createArticle() {
     const formData = new FormData();
     for (var i = 0; i < this.myFiles.length; i++) {
-      formData.append("Files", this.myFiles[i]);
+      formData.append("Files", this.myFiles[i])
     }
 
     this.imageService.uploadImage(formData).subscribe(
@@ -73,7 +70,7 @@ export class CreateArticleComponent implements OnInit{
 
   getFileDetails(e) {
     for (var i = 0; i < e.target.files.length; i++) {
-      this.myFiles.push(e.target.files[i]);
+      this.myFiles.push(e.target.files[i])
     }
   }
 

@@ -12,7 +12,7 @@ namespace ArticlesService.Infrastructure.Migrations
                 {
                     id_category = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    title = table.Column<string>(nullable: false)
+                    title = table.Column<string>(type: "nvarchar(50)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -25,7 +25,7 @@ namespace ArticlesService.Infrastructure.Migrations
                 {
                     id_image = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    name = table.Column<string>(nullable: false)
+                    name = table.Column<string>(type: "nvarchar(200)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -38,10 +38,10 @@ namespace ArticlesService.Infrastructure.Migrations
                 {
                     id_user = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    login = table.Column<string>(nullable: false),
-                    email = table.Column<string>(nullable: false),
-                    name = table.Column<string>(nullable: true),
-                    password = table.Column<string>(nullable: false)
+                    login = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    email = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    name = table.Column<string>(type: "nvarchar(50)", nullable: true),
+                    password = table.Column<string>(type: "nvarchar(50)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -54,7 +54,7 @@ namespace ArticlesService.Infrastructure.Migrations
                 {
                     id_article = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    title = table.Column<string>(nullable: false),
+                    title = table.Column<string>(type: "nvarchar(200)", nullable: false),
                     description = table.Column<string>(nullable: false),
                     content = table.Column<string>(nullable: false),
                     id_user = table.Column<int>(nullable: false)
@@ -130,7 +130,7 @@ namespace ArticlesService.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     id_article = table.Column<int>(nullable: false),
                     id_user = table.Column<int>(nullable: false),
-                    text = table.Column<string>(nullable: false)
+                    text = table.Column<string>(type: "nvarchar(200)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -152,7 +152,8 @@ namespace ArticlesService.Infrastructure.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_article_id_user",
                 table: "article",
-                column: "id_user");
+                column: "id_user")
+                .Annotation("SqlServer:Clustered", false);
 
             migrationBuilder.CreateIndex(
                 name: "IX_article_has_category_id_article",
@@ -183,6 +184,18 @@ namespace ArticlesService.Infrastructure.Migrations
                 name: "IX_comment_id_user",
                 table: "comment",
                 column: "id_user");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_user_email",
+                table: "user",
+                column: "email",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_user_login",
+                table: "user",
+                column: "login",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

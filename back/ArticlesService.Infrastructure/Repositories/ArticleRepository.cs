@@ -17,7 +17,19 @@ namespace ArticlesService.Infrastructure.Repositories
             _context = context;
         }
 
-        List<ArticleDto> IArticleRepository.GetArticles()
+        List<ArticleCardDto> IArticleRepository.GetArticles()
+        {
+            return _context.Articles.Include(a => a.User)
+                .Select(a => new ArticleCardDto
+                {
+                    Id = a.Id,
+                    Title = a.Title,
+                    Description = a.Description,
+                    UserLogin = a.User.Login
+                }).OrderByDescending(a => a.Id).ToList();
+        }
+
+        public ArticleDto GetArticle(int articleId)
         {
             return _context.Articles.Include(a => a.User)
                 .Select(a => new ArticleDto
@@ -27,55 +39,49 @@ namespace ArticlesService.Infrastructure.Repositories
                     Description = a.Description,
                     Content = a.Content,
                     UserLogin = a.User.Login
+                }).FirstOrDefault(a => a.Id == articleId);
+        }
+
+        public List<ArticleCardDto> GetArticlesByTitle(string title)
+        {
+            return _context.Articles.Include(a => a.User).Where(a => a.Title.Contains(title))
+                .Select(a => new ArticleCardDto
+                {
+                    Id = a.Id,
+                    Title = a.Title,
+                    Description = a.Description,
+                    UserLogin = a.User.Login
+                }).OrderByDescending(a => a.Id).ToList();
+
+        }
+
+        public List<ArticleCardDto> GetArticlesByAuthorLogin(string login)
+        {
+            return _context.Articles.Include(a => a.User).Where(a => a.User.Login.Contains(login))
+                .Select(a => new ArticleCardDto
+                {
+                    Id = a.Id,
+                    Title = a.Title,
+                    Description = a.Description,
+                    UserLogin = a.User.Login
                 }).ToList();
         }
-        private ArticleDto GetArticleDto(Article article)
+
+        private ArticleCardDto GetArticleCardDto(Article article)
         {
-            return new ArticleDto()
+            return new ArticleCardDto()
             {
                 Id = article.Id,
                 Title = article.Title,
                 Description = article.Description,
-                Content = article.Content,
                 UserLogin = article.User.Login
             };
         }
 
-        public ArticleDto GetArticleDto(int articleId)
+        public List<ArticleCardDto> GetArticlesByCategories(List<int> categories)
         {
-            return GetArticleDto(_context.Articles.Include(a => a.User).SingleOrDefault(a => a.Id == articleId));
-        }
-        public List<ArticleDto> GetArticlesByTitle(string title)
-        {
-            return _context.Articles.Include(a => a.User).Where(a => a.Title.Contains(title))
-                .Select(a => new ArticleDto
-                {
-                    Id = a.Id,
-                    Title = a.Title,
-                    Description = a.Description,
-                    Content = a.Content,
-                    UserLogin = a.User.Login
-                }).ToList();
-
-        }
-
-        public List<ArticleDto> GetArticlesByAuthorLogin(string login)
-        {
-            return _context.Articles.Include(a => a.User).Where(a => a.User.Login.Contains(login))
-                .Select(a => new ArticleDto
-                {
-                    Id = a.Id,
-                    Title = a.Title,
-                    Description = a.Description,
-                    Content = a.Content,
-                    UserLogin = a.User.Login
-                }).ToList();
-        }
-
-        public List<ArticleDto> GetArticlesByCategories(List<int> categories)
-        {
-            var articles = _context.Articles.Include(a => a.User).Include(a => a.ArticleCategories);
-            var result = new List<ArticleDto>();
+            var articles = _context.Articles.Include(a => a.User).Include(a => a.ArticleCategories).OrderByDescending(a => a.Id);
+            var result = new List<ArticleCardDto>();
 
             foreach (var article in articles)
             {
@@ -84,36 +90,27 @@ namespace ArticlesService.Infrastructure.Repositories
 
                 if (categories.All(categoryIds.Contains))
                 {
-                    result.Add(GetArticleDto(article));
+                    result.Add(GetArticleCardDto(article));
                 }
             }
 
             return result;
         }
 
-        public List<ArticleDto> GetArticleByUserId(int userId)
+        public List<UserArticleCardDto> GetArticleByUserId(int userId)
         {
             return _context.Articles.Include(a => a.User).Where(a => a.User.Id == userId)
-                .Select(a => new ArticleDto
+                .Select(a => new UserArticleCardDto
                 {
                     Id = a.Id,
                     Title = a.Title,
-                    Description = a.Description,
-                    Content = a.Content,
-                    UserLogin = a.User.Login
-                }).ToList();
+                    Description = a.Description
+                }).OrderByDescending(a => a.Id).ToList();
         }
 
         public bool IsUserAuthorOfArticle(int userId, int articleId)
         {
-            var articles = GetArticleByUserId(userId);
-
-            if (articles.Any(a => a.Id == articleId))
-            {
-                return true;
-            }
-
-            return false;
+            return GetArticleByUserId(userId).Any(a => a.Id == articleId);
         }
 
         public void Delete(int articleId)
