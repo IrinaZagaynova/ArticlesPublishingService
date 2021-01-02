@@ -30,7 +30,7 @@ WHERE (@__login_0 = N'') OR (CHARINDEX(@__login_0, [u].[login]) > 0)
 DECLARE @__articleId_0 int;  
 SET @__articleId_0 = 1
 
-SELECT TOP(1) [a].[id_article] AS [Id], [a].[title] AS [Title], [a].[description] AS [Description], [a].[content] AS [Content], [u].[login] AS [UserLogin]
+SELECT TOP(2) [a].[id_article] AS [Id], [a].[title] AS [Title], [a].[description] AS [Description], [a].[content] AS [Content], [u].[login] AS [UserLogin]
 FROM [article] AS [a]
 INNER JOIN [user] AS [u] ON [a].[id_user] = [u].[id_user]
 WHERE [a].[id_article] = @__articleId_0
