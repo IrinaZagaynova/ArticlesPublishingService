@@ -20,13 +20,25 @@
   margin-left: 10px;
 }
 
-.images
+/* .images
 {
   margin: 0 0 15px 8px;
-}
+} */
 
 .image
 {
-  width: 755px
+  /*width: 755px; */
+  width: 674.5px;
+  margin-left: 15px;
+}
+
+.description
+{
+  text-align: justify;
+}
+
+.content
+{
+  text-align: justify;
 }
 
