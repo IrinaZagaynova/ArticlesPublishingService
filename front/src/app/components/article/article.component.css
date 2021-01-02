@@ -22,11 +22,23 @@
 
 .images
 {
-  margin: 0 0 15px 8px;
+  margin: 0 0 15px 0;
 }
 
 .image
 {
-  width: 755px
+  /*width: 755px; */
+  width: 674.5px;
+  margin-left: 15px;
+}
+
+.description
+{
+  text-align: justify;
+}
+
+.content
+{
+  text-align: justify;
 }
 
