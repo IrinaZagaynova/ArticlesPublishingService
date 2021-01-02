@@ -54,11 +54,10 @@ namespace ArticlesService.API.Controllers
         }
 
         [HttpGet("get-user-articles")]
-        //[Authorize]
+        [Authorize]
         public IActionResult GetUserArticles()
         {
-            //var userId = int.Parse(User.Claims.Single(c => c.Type == ClaimTypes.NameIdentifier).Value);
-            var userId = 1;
+            var userId = int.Parse(User.Claims.Single(c => c.Type == ClaimTypes.NameIdentifier).Value);
             return Ok(_articleRepository.GetArticleByUserId(userId));
         }
 
