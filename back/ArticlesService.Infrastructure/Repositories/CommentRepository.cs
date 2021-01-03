@@ -18,16 +18,6 @@ namespace ArticlesService.Infrastructure.Repositories
             _context = context;
         }
 
-        public CommentDto GetCommentDto(Comment comment)
-        {
-            return new CommentDto()
-            {
-                Id = comment.Id,
-                Login = comment.User.Login,
-                Text = comment.Text
-            };
-        }
-
         public List<CommentDto> GetComments(int articleId)
         {
             return _context.Comments.Include(c => c.User).Where(c => c.ArticleId == articleId)
