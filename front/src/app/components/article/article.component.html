@@ -25,8 +25,8 @@
   </div>
   <div>
   <p *ngIf='!isLoggedIn'>
-    <a [routerLink]="['/login']">Авторизуйтесь</a>, чтобы иметь возможность оставлять комментарии.
-    <a [routerLink]="['/registration']">Зарегистрируйтесь</a>, если у вас еще нет аккаунта.
+    <a [routerLink]="['/login']">Sign in</a> to be able to comment.
+    <a [routerLink]="['/registration']">Sign up</a> if you don't have an account yet.
   </p>
   </div>
   <form class="add-comment-form" *ngIf='isLoggedIn'>
@@ -34,7 +34,7 @@
       <textarea class="form-control" id="comment" [(ngModel)]="text" name="text"></textarea>
     </div>
     <div class="form-group">
-      <button class="btn btn-primary" name="add-comment-button" type="submit" (click)="createComment()" onclick="this.blur()">Добавить</button>
+      <button class="btn btn-primary" name="add-comment-button" type="submit" (click)="createComment()" onclick="this.blur()">Add</button>
     </div>
   </form>
   <div class="comments-list row">
