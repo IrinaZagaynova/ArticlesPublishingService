@@ -14,7 +14,7 @@
     </div>
   </form>
   <div class="categories-list row">
-    <label>Карегории</label>
+    <label>Категории</label>
     <div *ngFor="let category of categories, index as i">
       <input class="i" type="checkbox" [(ngModel)]="category[i]" (ngModelChange)="addSelected(category, $event)" />
       {{category.title}}
