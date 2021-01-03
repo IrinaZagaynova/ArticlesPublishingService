@@ -39,7 +39,7 @@ namespace ArticlesService.Infrastructure.Repositories
                     Description = a.Description,
                     Content = a.Content,
                     UserLogin = a.User.Login
-                }).FirstOrDefault(a => a.Id == articleId);
+                }).SingleOrDefault(a => a.Id == articleId);
         }
 
         public List<ArticleCardDto> GetArticlesByTitle(string title)
