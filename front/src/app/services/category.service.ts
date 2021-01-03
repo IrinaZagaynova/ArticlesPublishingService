@@ -1,7 +1,7 @@
 import { Inject, Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from 'rxjs';
 import { CategoryModel } from '../models/category.model';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient } from '@angular/common/http';
 import { API_URL } from '../app-injection-tokens';
 import { Router } from '@angular/router';
 

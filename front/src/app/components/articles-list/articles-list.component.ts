@@ -4,7 +4,7 @@ import { ViewChildren } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { ArticleCardModel } from 'src/app/models/article-card.model';
 import { CategoryModel } from '../../models/category.model';
-import { ArticleService} from '../../services/article.service'
+import { ArticleService} from '../../services/article.service';
 import { CategoryService } from '../../services/category.service';
 
 @Component({
@@ -13,7 +13,7 @@ import { CategoryService } from '../../services/category.service';
   styleUrls: ['./articles-list.component.css']
 })
 export class ArticlesListComponent implements OnInit{
-  @ViewChildren("checkboxes") checkboxes: QueryList<ElementRef>;
+  @ViewChildren("checkboxes") checkboxes: QueryList<ElementRef>
   articles: ArticleCardModel[] = []
   categories: CategoryModel[] = []
   selected: CategoryModel[] = []
@@ -81,7 +81,7 @@ export class ArticlesListComponent implements OnInit{
   getAllCategories() {
     this.categoryService.getAllCategories().subscribe(data => {
       this.categories = data
-    });
+    })
   }
 
   addSelected(item, evt) {
@@ -101,6 +101,6 @@ export class ArticlesListComponent implements OnInit{
   uncheckAll() {
     this.checkboxes.forEach((element) => {
       element.nativeElement.checked = false
-    });
+    })
   }
 }

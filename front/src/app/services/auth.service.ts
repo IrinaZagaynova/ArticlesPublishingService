@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { API_URL} from '../app-injection-tokens';
-import { Inject, Injectable } from '@angular/core'
+import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -25,7 +25,7 @@ export class AuthService {
       email, password
     }).pipe(
       tap(token => {
-        localStorage.setItem(ACCESS_TOKEN_KEY, token.access_token);
+        localStorage.setItem(ACCESS_TOKEN_KEY, token.access_token)
       })
     )
   }
@@ -35,19 +35,19 @@ export class AuthService {
       login, email, name, password
     }).pipe(
       tap(token => {
-        localStorage.setItem(ACCESS_TOKEN_KEY, token.access_token);
+        localStorage.setItem(ACCESS_TOKEN_KEY, token.access_token)
       })
     )
   }
 
   isAuthenticated(): boolean {
-    var token = localStorage.getItem(ACCESS_TOKEN_KEY);
+    var token = localStorage.getItem(ACCESS_TOKEN_KEY)
     return token && !this.jwtHelper.isTokenExpired(token)
   }
 
   logout(): void {
-    localStorage.removeItem(ACCESS_TOKEN_KEY);
-    this.router.navigate(['']);
+    localStorage.removeItem(ACCESS_TOKEN_KEY)
+    this.router.navigate([''])
   }
 
 }

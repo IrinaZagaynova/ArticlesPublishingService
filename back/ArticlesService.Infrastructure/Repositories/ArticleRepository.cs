@@ -36,7 +36,6 @@ namespace ArticlesService.Infrastructure.Repositories
                 {
                     Id = a.Id,
                     Title = a.Title,
-                    Description = a.Description,
                     Content = a.Content,
                     UserLogin = a.User.Login
                 }).SingleOrDefault(a => a.Id == articleId);

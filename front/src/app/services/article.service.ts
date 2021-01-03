@@ -1,7 +1,7 @@
 import { Inject, Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ArticleModel } from '../models/article.model';
-import { HttpClient, HttpParams } from '@angular/common/http'
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { API_URL } from '../app-injection-tokens';
 import { Router } from '@angular/router';
 import { ArticleCardModel } from "../models/article-card.model";

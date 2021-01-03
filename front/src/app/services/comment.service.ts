@@ -1,10 +1,9 @@
 import { Inject, Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from 'rxjs';
 import { CommentModel } from '../models/comment.model';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient } from '@angular/common/http';
 import { API_URL } from '../app-injection-tokens';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -19,15 +18,15 @@ export class CommentService {
     private router: Router
   ) { }
 
-    getComments(articleId: number) {
-      return this.http.get<CommentModel[]>(this.apiUrl + `api/Comment/comments/${articleId}`)
-    }
+  getComments(articleId: number) {
+    return this.http.get<CommentModel[]>(this.apiUrl + `api/Comment/comments/${articleId}`)
+  }
 
-    getCommentsCount(articleId: number) {
-      return this.http.get<number>(this.apiUrl + `api/Comment/comments-count/${articleId}`)
-    }
+  getCommentsCount(articleId: number) {
+    return this.http.get<number>(this.apiUrl + `api/Comment/comments-count/${articleId}`)
+  }
 
-    createComment(articleId: number, text: string) {
-      return this.http.post(this.apiUrl + `api/Comment/create-comment`, {articleId, text});
-    }
+  createComment(articleId: number, text: string) {
+    return this.http.post(this.apiUrl + `api/Comment/create-comment`, {articleId, text})
+  }
 }

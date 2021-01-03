@@ -1,7 +1,7 @@
-import { EventEmitter, Inject, Injectable, Output } from "@angular/core";
+import { Inject, Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ImageModel } from '../models/image.model';
-import { HttpClient, HttpEventType } from '@angular/common/http'
+import { HttpClient} from '@angular/common/http';
 import { API_URL } from '../app-injection-tokens';
 import { Router } from '@angular/router';
 
@@ -24,7 +24,7 @@ export class ImageService {
   }
 
   public uploadImage(formData: FormData): Observable<number[]> {
-    return this.http.post<number[]>(this.apiUrl + `api/Image/upload`, formData);
+    return this.http.post<number[]>(this.apiUrl + `api/Image/upload`, formData)
 }
 
 }

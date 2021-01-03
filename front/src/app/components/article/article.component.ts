@@ -1,6 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
 import { ArticleModel } from '../../models/article.model';
 import { CommentModel } from '../../models/comment.model';
 import { CategoryModel } from '../../models/category.model';
