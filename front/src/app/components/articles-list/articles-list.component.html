@@ -11,7 +11,7 @@
       <i class="fas fa-search" type="submit" (click)="getArticlesByAutor()"></i>
     </form>
     <div class="categories-list row">
-      <label>Категории</label>
+      <label>Categories</label>
       <div *ngFor="let category of categories, index as i">
         <input #checkboxes type="checkbox" [(ngModel)]="category[i]" (ngModelChange)="addSelected(category, $event)"/>
         {{category.title}}
