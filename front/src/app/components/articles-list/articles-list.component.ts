@@ -27,15 +27,26 @@ export class ArticlesListComponent implements OnInit{
   }
 
   public ngOnInit() {
-    this.getArticles()
+    this.getArticlesByDesc()
     this.getAllCategories()
   }
 
-  getArticles() {
+  getFocus()
+  {
+    document.getElementById("option2").focus();
+  }
+
+  getArticlesByDesc() {
     this.articleService.articles.subscribe(data => {
       this.articles = data
     })
   }
+
+  getArticlesByAsc() {
+    this.articleService.articles_by_asc.subscribe(data => {
+      this.articles = data
+    })
+  } 
 
   getArticlesByTitle() {
     if (!this.title)
@@ -94,7 +105,7 @@ export class ArticlesListComponent implements OnInit{
   }
 
   discardSearch() {
-    this.getArticles()
+    this.getArticlesByDesc()
     this.uncheckAll()
   }
 

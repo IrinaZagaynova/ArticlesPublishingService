@@ -13,6 +13,7 @@ import { UserArticleCardModel } from "../models/user-article-card.mode";
 
 export class ArticleService {
   articles: BehaviorSubject<ArticleCardModel[]>;
+  articles_by_asc: BehaviorSubject<ArticleCardModel[]>;
 
   constructor(
     private http: HttpClient,
@@ -20,9 +21,14 @@ export class ArticleService {
     private router: Router
   ) {
     this.articles = new BehaviorSubject<ArticleCardModel[]>([]);
-    this.http.get<ArticleCardModel[]>(apiUrl + `api/Article/articles`).subscribe(data => {
+    this.http.get<ArticleCardModel[]>(apiUrl + `api/Article/articles-by-desc`).subscribe(data => {
       this.articles.next(data);
     })
+    
+    this.articles_by_asc = new BehaviorSubject<ArticleCardModel[]>([]);
+    this.http.get<ArticleCardModel[]>(apiUrl + `api/Article/articles-by-asc`).subscribe(data => {
+      this.articles_by_asc.next(data);
+    }) 
   }
 
   getArticleById(id: number) {
