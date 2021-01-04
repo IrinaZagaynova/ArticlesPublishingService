@@ -26,7 +26,8 @@ namespace ArticlesService.Infrastructure.Repositories
                     Title = a.Title,
                     Description = a.Description,
                     UserLogin = a.User.Login
-                }).OrderByDescending(a => a.Id).ToList();
+                })
+                .OrderByDescending(a => a.Id).ToList();
         }
 
         public ArticleDto GetArticle(int articleId)
@@ -38,7 +39,8 @@ namespace ArticlesService.Infrastructure.Repositories
                     Title = a.Title,
                     Content = a.Content,
                     UserLogin = a.User.Login
-                }).SingleOrDefault(a => a.Id == articleId);
+                })
+                .SingleOrDefault(a => a.Id == articleId);
         }
 
         public List<ArticleCardDto> GetArticlesByTitle(string title)
@@ -50,7 +52,8 @@ namespace ArticlesService.Infrastructure.Repositories
                     Title = a.Title,
                     Description = a.Description,
                     UserLogin = a.User.Login
-                }).OrderByDescending(a => a.Id).ToList();
+                })
+                .OrderByDescending(a => a.Id).ToList();
 
         }
 
@@ -63,7 +66,8 @@ namespace ArticlesService.Infrastructure.Repositories
                     Title = a.Title,
                     Description = a.Description,
                     UserLogin = a.User.Login
-                }).ToList();
+                })
+                .ToList();
         }
 
         private ArticleCardDto GetArticleCardDto(Article article)
@@ -104,7 +108,8 @@ namespace ArticlesService.Infrastructure.Repositories
                     Id = a.Id,
                     Title = a.Title,
                     Description = a.Description
-                }).OrderByDescending(a => a.Id).ToList();
+                })
+                .OrderByDescending(a => a.Id).ToList();
         }
 
         public bool IsUserAuthorOfArticle(int userId, int articleId)
@@ -115,11 +120,6 @@ namespace ArticlesService.Infrastructure.Repositories
         public void Delete(int articleId)
         {
             var article = _context.Articles.Include(a => a.User).Include(a => a.ArticleCategories).Include(a => a.ArticleImages).SingleOrDefault(a => a.Id == articleId);
-
-            if (article == null)
-            {
-                throw new Exception();
-            }
 
             _context.Remove(article);
             _context.SaveChanges();
@@ -149,6 +149,55 @@ namespace ArticlesService.Infrastructure.Repositories
             if (createArticleDto.ImageIds.Count() != 0)
             {
                 foreach (var imageId in createArticleDto.ImageIds)
+                {
+                    _context.Add(new ArticleImage { ArticleId = article.Id, ImageId = imageId });
+                }
+            }
+
+            _context.SaveChanges();
+        }
+
+        public void Edit(int articleId, CreateArticleDto createArticleDto)
+        {
+            var article = _context.Articles.SingleOrDefault(a => a.Id == articleId);
+
+            article.Title = createArticleDto.Title;
+            article.Description = createArticleDto.Description;
+            article.Content = createArticleDto.Content;
+
+            _context.Update(article);
+
+            var articleCategories = _context.ArticleCategories.Where(ac => ac.ArticleId == articleId);
+
+            foreach (var articleCategory in articleCategories)
+            {
+                if (!createArticleDto.CategoryIds.Contains(articleCategory.CategoryId))
+                {
+                    _context.Remove(articleCategory);
+                }
+            }
+  
+            foreach (var categoryId in createArticleDto.CategoryIds)
+            {
+                if (!articleCategories.Any(ac => ac.CategoryId == categoryId))
+                {
+                    _context.Add(new ArticleCategory { ArticleId = article.Id, CategoryId = categoryId });
+                }
+            }
+
+            var articleImages = _context.ArticleImages.Where(ac => ac.ArticleId == articleId);
+
+            foreach (var articleImage in articleImages)
+            {
+                if (!createArticleDto.ImageIds.Contains(articleImage.ImageId))
+                {
+                    _context.Remove(articleImage);
+                }
+            }
+
+            foreach (var imageId in createArticleDto.ImageIds)
+            {
+                if (!articleImages.Any(ai => ai.ImageId == imageId))
                 {
                     _context.Add(new ArticleImage { ArticleId = article.Id, ImageId = imageId });
                 }

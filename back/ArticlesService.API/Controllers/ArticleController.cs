@@ -99,5 +99,29 @@ namespace ArticlesService.API.Controllers
                 return NotFound();
             }
         }
+
+        [HttpPost("edit-article")]
+        //[Authorize]
+        public IActionResult EditArticle(int articleId, CreateArticleDto createArticleDto)
+        {
+            /*
+            var userId = int.Parse(User.Claims.Single(c => c.Type == ClaimTypes.NameIdentifier).Value);
+            
+            if (!_articleRepository.IsUserAuthorOfArticle(userId, articleId))
+            {
+                return BadRequest();
+            }
+            */
+
+            try
+            {
+                _articleRepository.Edit(articleId, createArticleDto);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
     }
 }

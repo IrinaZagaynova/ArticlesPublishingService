@@ -26,7 +26,8 @@ namespace ArticlesService.Infrastructure.Repositories
                     Id = c.Id,
                     Login = c.User.Login,
                     Text = c.Text
-                }).ToList();        
+                })
+                .ToList();        
         }
 
         public int GetCommentsCount(int articleId)

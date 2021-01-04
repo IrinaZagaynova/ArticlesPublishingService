@@ -16,6 +16,7 @@ namespace ArticlesService.Domain.Interfaces
         List<UserArticleCardDto> GetArticleByUserId(int userId);
         bool IsUserAuthorOfArticle(int userId, int articleId);
         void Delete(int articleId);
-        void Create(CreateArticleDto createArticleDto, User user);
+        void Create(CreateArticleDto createArticleDto, User user);      
+        void Edit(int articleId, CreateArticleDto createArticleDto);
     }
 }
