@@ -23,10 +23,16 @@ namespace ArticlesService.API.Controllers
             _userRepository = userRepository;
         }
 
-        [HttpGet("articles")]
-        public IActionResult GetArticles()
+        [HttpGet("articles-by-desc")]
+        public IActionResult GetArticlesByDesc()
         {
-            return Ok(_articleRepository.GetArticles());
+            return Ok(_articleRepository.GetArticlesByDesc());
+        }
+
+        [HttpGet("articles-by-asc")]
+        public IActionResult GetArticlesByAsc()
+        {
+            return Ok(_articleRepository.GetArticlesByAsc());
         }
 
         [HttpGet("article/{articleId}")]

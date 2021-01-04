@@ -17,7 +17,19 @@ namespace ArticlesService.Infrastructure.Repositories
             _context = context;
         }
 
-        List<ArticleCardDto> IArticleRepository.GetArticles()
+        List<ArticleCardDto> IArticleRepository.GetArticlesByAsc()
+        {
+            return _context.Articles.Include(a => a.User)
+                .Select(a => new ArticleCardDto
+                {
+                    Id = a.Id,
+                    Title = a.Title,
+                    Description = a.Description,
+                    UserLogin = a.User.Login
+                }).OrderBy(a => a.Id).ToList();
+        }
+
+        List<ArticleCardDto> IArticleRepository.GetArticlesByDesc()
         {
             return _context.Articles.Include(a => a.User)
                 .Select(a => new ArticleCardDto

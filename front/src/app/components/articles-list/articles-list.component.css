@@ -48,3 +48,13 @@
   display: table;
   margin: 10px 0 15px;
 }
+
+.sort-mode
+{
+  margin-top: 15px;
+}
+
+.sort-option
+{
+  margin-right: 15px;
+}
