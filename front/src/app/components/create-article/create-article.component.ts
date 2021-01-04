@@ -16,11 +16,7 @@ export class CreateArticleComponent implements OnInit{
   content: string
   categories: CategoryModel[] = []
   selectedCategories: CategoryModel[] = []
-  imageIds: number[] = []
-  selectedFiles: File = null
-  form: FormGroup
   myFiles: string[] = []
-
 
   constructor(
     private articleService: ArticleService,
@@ -31,16 +27,15 @@ export class CreateArticleComponent implements OnInit{
 
   ngOnInit(): void {
     this.getAllCategories()
-    this.form = new FormGroup({
-      Files: new FormControl(null)
-    })
   }
 
   createArticle() {
     const formData = new FormData();
-    for (var i = 0; i < this.myFiles.length; i++) {
-      formData.append("Files", this.myFiles[i])
-    }
+
+    if (this.myFiles.length != 0) {
+      for (var i = 0; i < this.myFiles.length; i++) {
+        formData.append("Files", this.myFiles[i])
+      }
 
     this.imageService.uploadImage(formData).subscribe(
       data => {
@@ -49,8 +44,16 @@ export class CreateArticleComponent implements OnInit{
         }, () => {
           alert("Не удалось добавить статью")
         })
-      }
-    )
+      })
+    }
+    else {
+      this.articleService.createArticle(this.title, this.description, this.content, this.selectedCategories.map(x => x.id), [])
+      .subscribe(() => {
+        location.reload()
+      }, () => {
+        alert("Не удалось добавить статью")
+      })
+    }
   }
 
   getAllCategories() {
