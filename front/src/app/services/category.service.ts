@@ -4,14 +4,13 @@ import { CategoryModel } from '../models/category.model';
 import { HttpClient } from '@angular/common/http';
 import { API_URL } from '../app-injection-tokens';
 import { Router } from '@angular/router';
+import { SelectedCategoryModel } from "../models/selected-category.model";
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class CategoryService {
-  categories: BehaviorSubject<CategoryModel[]>;
-
   constructor(
     private http: HttpClient,
     @Inject(API_URL) private apiUrl: string,
@@ -25,6 +24,10 @@ export class CategoryService {
 
   getAllCategories() {
     return this.http.get<CategoryModel[]>(this.apiUrl + `api/Category/all-categories`)
+  }
+
+  getSelectedCategories(articleId: number) {
+    return this.http.get<SelectedCategoryModel[]>(this.apiUrl + `api/Category/selected-categories/${articleId}`)
   }
 }
 

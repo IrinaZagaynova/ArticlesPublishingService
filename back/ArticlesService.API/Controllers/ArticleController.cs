@@ -35,10 +35,10 @@ namespace ArticlesService.API.Controllers
             return Ok(_articleRepository.GetArticlesByAsc());
         }
 
-        [HttpGet("article/{articleId}")]
-        public IActionResult GetArticleById(int articleId)
+        [HttpGet("article-page/{articleId}")]
+        public IActionResult GetArticleToPage(int articleId)
         {
-            return Ok(_articleRepository.GetArticle(articleId));            
+            return Ok(_articleRepository.GetArticleToPage(articleId));            
         }
 
         [HttpGet("articles-by-title")]
@@ -106,7 +106,7 @@ namespace ArticlesService.API.Controllers
             }
         }
 
-        [HttpPost("edit-article")]
+        [HttpPost("edit-article/{articleId}")]
         [Authorize]
         public IActionResult EditArticle(int articleId, CreateArticleDto createArticleDto)
         {
@@ -126,6 +126,12 @@ namespace ArticlesService.API.Controllers
             {
                 return NotFound();
             }
+        }
+
+        [HttpGet("article/{articleId}")]
+        public IActionResult GetArticle(int articleId)
+        {
+            return Ok(_articleRepository.GetArticle(articleId));
         }
     }
 }

@@ -6,14 +6,16 @@ import { ArticleComponent } from './components/article/article.component';
 import { CreateArticleComponent } from './components/create-article/create-article.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { UserArticlesListComponent } from './components/user-articles-list/user-articles-list.component';
+import { EditArticleComponent } from './components/edit-article/edit-article.component';
 
 const routes: Routes = [
-  { path: '', component: ArticlesListComponent},
-  { path: 'user-atricles', component: UserArticlesListComponent},
+  { path: '', component: ArticlesListComponent },
+  { path: 'user-atricles', component: UserArticlesListComponent },
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },
-  { path: 'create-article', component: CreateArticleComponent},
-  { path: 'article/:id', component: ArticleComponent}
+  { path: 'create-article', component: CreateArticleComponent },
+  { path: 'edit-article/:id', component: EditArticleComponent },
+  { path: 'article/:id', component: ArticleComponent }
 ];
 
 @NgModule({

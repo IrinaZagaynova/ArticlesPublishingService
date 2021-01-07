@@ -29,6 +29,35 @@ namespace ArticlesService.Infrastructure.Repositories
                 .ToList();
         }
 
+        public List<SelectedCategoryDto> GetSelectedCategories(int articleId)
+        {
+            var categories = GetCategories();
+            var articleCategories = GetArtilceCategories(articleId);
+            List<SelectedCategoryDto> result = new List<SelectedCategoryDto>();
+
+            foreach (var category in categories)
+            {
+                var item = new SelectedCategoryDto()
+                { 
+                    Id = category.Id,               
+                    Title = category.Title
+                };
+
+                if (articleCategories.Any(ac => ac.Id == category.Id))
+                {
+                    item.Checked = true;               
+                }
+                else
+                {
+                    item.Checked = false;
+                }
+
+                result.Add(item);
+            }
+
+            return result;
+        }
+
         public List<CategoryDto> GetCategories()
         {
             return _context.Categories

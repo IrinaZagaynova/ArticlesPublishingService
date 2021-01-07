@@ -9,6 +9,7 @@ namespace ArticlesService.Domain.Interfaces
     public interface ICategoryRepository
     {
         List<CategoryDto> GetArtilceCategories(int articleId);
+        List<SelectedCategoryDto> GetSelectedCategories(int articleId);
         List<CategoryDto> GetCategories();
     }
 }

@@ -1,0 +1,50 @@
+.edit-article-block
+{
+  margin: 10px 25% 0;
+}
+
+#description
+{
+  resize: none;
+  height: 90px;
+}
+
+#content
+{
+  resize: none;
+  height: 220px;
+}
+
+.categories-list
+{
+  display: table;
+  margin: 0 0 15px;
+}
+
+.upload-images
+{
+  display: none;
+  margin-bottom: 20px;
+}
+
+.current-images
+{
+  margin-left: 15px;
+  margin-right: 7px;
+}
+
+.image
+{
+  width: 97%;
+  height: 97%;
+}
+
+#change-images-button
+{
+  margin: 10px auto;
+}
+
+#categories-block
+{
+  margin-bottom: 10px;
+}

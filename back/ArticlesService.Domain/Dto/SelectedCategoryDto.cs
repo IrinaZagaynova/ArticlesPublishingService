@@ -4,11 +4,10 @@ using System.Text;
 
 namespace ArticlesService.Domain.Dto
 {
-    public class ArticleDto
+    public class SelectedCategoryDto
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public string Description { get; set; }
-        public string Content { get; set; }
+        public Boolean Checked { get; set; }
     }
 }

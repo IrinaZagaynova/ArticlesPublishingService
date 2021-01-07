@@ -1,0 +1,45 @@
+<div class="edit-article-block">
+  <form class="add-form">
+    <div class="form-group">
+      <label>Title</label>
+      <input class="form-control" id="title" [(ngModel)]="title" name="title">
+    </div>
+    <div class="form-group">
+      <label>Description</label>
+      <textarea class="form-control" type="label-textarea" id="description" [(ngModel)]="description" name="description"></textarea>
+    </div>
+    <div class="form-group">
+      <label>Content</label>
+     <textarea class="form-control" id="content" [(ngModel)]="content" name="content"></textarea>
+    </div>
+  </form>
+  <div class="form-group" id="categories-block">
+    <label for="options">Categories:</label>
+    <div *ngFor="let option of options">
+            <input type="checkbox"
+                   name="options"
+                   value="{{option.id}}"
+                   [(ngModel)]="option.checked"
+                   (ngModelChange)="addSelected(option, $event)"/>
+            {{option.title}}
+    </div>
+  </div>
+  <label>Images</label>
+  <div class="current-images" id="current-images">
+    <div class="row row-cols-1 row-cols-md-3">
+      <div class="col mb-4" *ngFor="let image of images" class="images">
+        <img src="assets/{{image.name}}" class="image">
+      </div>
+    </div>
+  </div>
+  <button class="btn btn-secondary btn-sm" id="change-images-button" type='button' (click)='viewUploadImagesBlock()'>Change images</button>
+  <div class="upload-images" id="upload-images">
+    <ng-container>
+        <input type="file" id="file" multiple (change)="getFileDetails($event)">
+    </ng-container>
+    <button class="btn btn-secondary btn-sm" id="cancel-change-images-button" type='button' (click)="viewCurrentImagesBlock()">Сancel</button>
+  </div>
+  <div class="form-group">
+    <button class="btn btn-primary" name="add" type='button' (click)="editArticle()">Edit</button>
+  </div>
+</div>

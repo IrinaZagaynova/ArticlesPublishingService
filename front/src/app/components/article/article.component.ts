@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ArticleModel } from '../../models/article.model';
+import { ArticlePageModel } from '../../models/article-page.model';
 import { CommentModel } from '../../models/comment.model';
 import { CategoryModel } from '../../models/category.model';
 import { ArticleService } from '../../services/article.service';
@@ -17,7 +17,7 @@ import { ImageService } from '../../services/image.service';
   styleUrls: ['./article.component.css'],
 })
 export class ArticleComponent implements OnInit{
-  article: ArticleModel
+  article: ArticlePageModel
   comments: CommentModel[] = []
   commentForm: FormGroup
   text: string = ''
@@ -35,7 +35,7 @@ export class ArticleComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.articleService.getArticleById(this.router.snapshot.params.id).subscribe(res => {
+    this.articleService.getArticleToPage(this.router.snapshot.params.id).subscribe(res => {
       this.article = res
     });
     this.getComments()

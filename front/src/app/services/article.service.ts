@@ -1,11 +1,12 @@
 import { Inject, Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from 'rxjs';
-import { ArticleModel } from '../models/article.model';
+import { ArticlePageModel } from '../models/article-page.model';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { API_URL } from '../app-injection-tokens';
 import { Router } from '@angular/router';
 import { ArticleCardModel } from "../models/article-card.model";
 import { UserArticleCardModel } from "../models/user-article-card.mode";
+import { ArticleModel } from "../models/article-model";
 
 @Injectable({
   providedIn: 'root'
@@ -24,15 +25,15 @@ export class ArticleService {
     this.http.get<ArticleCardModel[]>(apiUrl + `api/Article/articles-by-desc`).subscribe(data => {
       this.articles.next(data);
     })
-    
+
     this.articles_by_asc = new BehaviorSubject<ArticleCardModel[]>([]);
     this.http.get<ArticleCardModel[]>(apiUrl + `api/Article/articles-by-asc`).subscribe(data => {
       this.articles_by_asc.next(data);
-    }) 
+    })
   }
 
-  getArticleById(id: number) {
-    return this.http.get<ArticleModel>(this.apiUrl + `api/Article/article/${id}`)
+  getArticleToPage(id: number) {
+    return this.http.get<ArticlePageModel>(this.apiUrl + `api/Article/article/${id}`)
   }
 
   getAtriclesByTitle(title: string) {
@@ -52,11 +53,21 @@ export class ArticleService {
   }
 
   createArticle(title: string, description: string, content: string, categoriesResult: number[], imageIds: number[]) {
-    return this.http.post(this.apiUrl + `api/Article/create-article`, {title, description, content, categoryIds: categoriesResult, imageIds: imageIds});
+    return this.http.post(this.apiUrl + `api/Article/create-article`,
+    {title, description, content, categoryIds: categoriesResult, imageIds: imageIds})
   }
 
   getArticlesByCategories(categoriesResult: number[]) {
     return this.http.post<ArticleCardModel[]>(this.apiUrl + `api/Article/articles-by-categories`, categoriesResult)
+  }
+
+  getArticle(id: number) {
+    return this.http.get<ArticleModel>(this.apiUrl + `api/Article/article/${id}`)
+  }
+
+  editArticle(id: number, title: string, description: string, content: string, categoriesResult: number[], imageIds: number[]) {
+    return this.http.post(this.apiUrl + `api/Article/edit-article/${id}`,
+    {title, description, content, categoryIds: categoriesResult, imageIds: imageIds})
   }
 }
 

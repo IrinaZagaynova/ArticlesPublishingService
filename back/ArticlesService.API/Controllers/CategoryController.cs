@@ -29,5 +29,11 @@ namespace ArticlesService.API.Controllers
         {
             return Ok(_repository.GetCategories());
         }
+
+        [HttpGet("selected-categories/{articleId}")]
+        public IActionResult GetSelectedCategories(int articleId)
+        {
+            return Ok(_repository.GetSelectedCategories(articleId));
+        }
     }
 }

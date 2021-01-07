@@ -21,6 +21,7 @@ import { CreateArticleComponent } from './components/create-article/create-artic
 import { RegistrationComponent } from './components/registration/registration.component';
 import { CategoryComponent } from './components/category/category.component';
 import { UserArticlesListComponent } from './components/user-articles-list/user-articles-list.component';
+import { EditArticleComponent } from './components/edit-article/edit-article.component';
 
 export function tokenGetter() {
   return localStorage.getItem(ACCESS_TOKEN_KEY);
@@ -39,6 +40,7 @@ export function tokenGetter() {
     RegistrationComponent,
     CategoryComponent,
     UserArticlesListComponent,
+    EditArticleComponent,
    ],
   imports: [
     CommonModule,

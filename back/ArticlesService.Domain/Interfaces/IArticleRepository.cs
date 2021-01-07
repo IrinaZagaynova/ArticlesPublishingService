@@ -10,7 +10,7 @@ namespace ArticlesService.Domain.Interfaces
     {
         List<ArticleCardDto> GetArticlesByAsc();
         List<ArticleCardDto> GetArticlesByDesc();
-        ArticleDto GetArticle(int articleId);
+        ArticlePageDto GetArticleToPage(int articleId);
         List<ArticleCardDto> GetArticlesByTitle(string title);
         List<ArticleCardDto> GetArticlesByAuthorLogin(string login);
         List<ArticleCardDto> GetArticlesByCategories(List<int> categories);
@@ -19,5 +19,6 @@ namespace ArticlesService.Domain.Interfaces
         void Delete(int articleId);
         void Create(CreateArticleDto createArticleDto, User user);      
         void Edit(int articleId, CreateArticleDto createArticleDto);
+        ArticleDto GetArticle(int articleId);
     }
 }

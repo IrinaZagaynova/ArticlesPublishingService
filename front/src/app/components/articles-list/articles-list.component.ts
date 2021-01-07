@@ -31,11 +31,6 @@ export class ArticlesListComponent implements OnInit{
     this.getAllCategories()
   }
 
-  getFocus()
-  {
-    document.getElementById("option2").focus();
-  }
-
   getArticlesByDesc() {
     this.articleService.articles.subscribe(data => {
       this.articles = data
@@ -46,7 +41,7 @@ export class ArticlesListComponent implements OnInit{
     this.articleService.articles_by_asc.subscribe(data => {
       this.articles = data
     })
-  } 
+  }
 
   getArticlesByTitle() {
     if (!this.title)

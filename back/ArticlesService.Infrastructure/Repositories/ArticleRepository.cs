@@ -26,7 +26,8 @@ namespace ArticlesService.Infrastructure.Repositories
                     Title = a.Title,
                     Description = a.Description,
                     UserLogin = a.User.Login
-                }).OrderBy(a => a.Id).ToList();
+                })
+                .OrderBy(a => a.Id).ToList();
         }
 
         List<ArticleCardDto> IArticleRepository.GetArticlesByDesc()
@@ -42,10 +43,10 @@ namespace ArticlesService.Infrastructure.Repositories
                 .OrderByDescending(a => a.Id).ToList();
         }
 
-        public ArticleDto GetArticle(int articleId)
+        public ArticlePageDto GetArticleToPage(int articleId)
         {
             return _context.Articles.Include(a => a.User)
-                .Select(a => new ArticleDto
+                .Select(a => new ArticlePageDto
                 {
                     Id = a.Id,
                     Title = a.Title,
@@ -216,6 +217,19 @@ namespace ArticlesService.Infrastructure.Repositories
             }
 
             _context.SaveChanges();
+        }
+
+        public ArticleDto GetArticle(int articleId)
+        {
+            return _context.Articles
+                .Select(a => new ArticleDto
+                {
+                    Id = a.Id,
+                    Title = a.Title,
+                    Description = a.Description,
+                    Content = a.Content,
+                })
+                .SingleOrDefault(a => a.Id == articleId);
         }
     }
 }

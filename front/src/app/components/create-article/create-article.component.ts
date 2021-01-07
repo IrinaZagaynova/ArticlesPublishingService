@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { ArticleModel } from 'src/app/models/article-model';
 import { CategoryModel } from '../../models/category.model';
 import { ArticleService } from '../../services/article.service';
 import { CategoryService} from '../../services/category.service';
