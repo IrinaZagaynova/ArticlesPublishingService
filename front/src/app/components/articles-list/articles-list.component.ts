@@ -27,20 +27,45 @@ export class ArticlesListComponent implements OnInit{
   }
 
   public ngOnInit() {
-    this.getArticlesByDesc()
+    this.getArticles()
     this.getAllCategories()
   }
 
-  getArticlesByDesc() {
+  getArticles()
+  {
     this.articleService.articles.subscribe(data => {
+      this.articles = data
+      if (document.getElementById("by newest").getAttribute("checked") != "checked")
+      {
+        this.articles.reverse();
+      }
+    })
+  }
+
+  getArticlesByAsc()
+  {
+    this.articleService.articles_by_asc.subscribe(data => {
       this.articles = data
     })
   }
 
-  getArticlesByAsc() {
-    this.articleService.articles_by_asc.subscribe(data => {
-      this.articles = data
-    })
+  ByDesc() {
+    if (document.getElementById("by newest").getAttribute("checked") != "checked")
+    {
+      document.getElementById("by newest").setAttribute("checked", "checked");
+      document.getElementById("by oldest").removeAttribute("checked");
+      this.articles.reverse();
+    }
+    document.getElementById("desc").style.backgroundColor="#545b62";
+    document.getElementById("asc").style.backgroundColor="#6c757d";
+  }
+
+  ByAsc() {
+    document.getElementById("by oldest").setAttribute("checked", "checked");
+      document.getElementById("by newest").removeAttribute("checked");
+    document.getElementById("asc").style.backgroundColor="#545b62";
+    document.getElementById("desc").style.backgroundColor="#6c757d";
+    this.articles.reverse();
   }
 
   getArticlesByTitle() {
@@ -100,7 +125,7 @@ export class ArticlesListComponent implements OnInit{
   }
 
   discardSearch() {
-    this.getArticlesByDesc()
+    this.getArticles();
     this.uncheckAll()
   }
 

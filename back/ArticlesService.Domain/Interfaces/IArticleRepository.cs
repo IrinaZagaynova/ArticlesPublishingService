@@ -8,8 +8,7 @@ namespace ArticlesService.Domain.Interfaces
 {
     public interface IArticleRepository
     {
-        List<ArticleCardDto> GetArticlesByAsc();
-        List<ArticleCardDto> GetArticlesByDesc();
+        List<ArticleCardDto> GetArticles();
         ArticlePageDto GetArticleToPage(int articleId);
         List<ArticleCardDto> GetArticlesByTitle(string title);
         List<ArticleCardDto> GetArticlesByAuthorLogin(string login);
