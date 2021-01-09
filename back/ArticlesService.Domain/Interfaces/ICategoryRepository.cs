@@ -11,5 +11,6 @@ namespace ArticlesService.Domain.Interfaces
         List<CategoryDto> GetArtilceCategories(int articleId);
         List<SelectedCategoryDto> GetSelectedCategories(int articleId);
         List<CategoryDto> GetCategories();
+        List<CategoryWithCountDto> GetCategoriesWithCount();
     }
 }

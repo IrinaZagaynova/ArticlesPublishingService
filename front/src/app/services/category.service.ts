@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { API_URL } from '../app-injection-tokens';
 import { Router } from '@angular/router';
 import { SelectedCategoryModel } from "../models/selected-category.model";
+import { CategoryWithCountModel } from "../models/category-with-count.model";
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,10 @@ export class CategoryService {
 
   getSelectedCategories(articleId: number) {
     return this.http.get<SelectedCategoryModel[]>(this.apiUrl + `api/Category/selected-categories/${articleId}`)
+  }
+
+  getCategoriesWithCount() {
+    return this.http.get<CategoryWithCountModel[]>(this.apiUrl + `api/Category/categories-with-count`)
   }
 }
 

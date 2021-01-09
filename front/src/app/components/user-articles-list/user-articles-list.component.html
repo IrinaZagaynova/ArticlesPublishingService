@@ -1,4 +1,5 @@
 <div class="common row">
+  <p class="create-article-message" *ngIf='!isUserHasArticles()'>You have not created any articles. <a [routerLink]="['/create-article']">Create</a></p>
   <div class="col-md-12">
     <div *ngFor="let article of articles" class="article">
       <h5>{{ article.title }}</h5>

@@ -30,4 +30,8 @@ export class UserArticlesListComponent implements OnInit {
       this.getArticlesByUser()
     })
   }
+
+  isUserHasArticles(): boolean {
+    return this.articles.length != 0
+  }
 }

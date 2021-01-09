@@ -3,6 +3,7 @@ import { ElementRef } from '@angular/core';
 import { ViewChildren } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { ArticleCardModel } from 'src/app/models/article-card.model';
+import { CategoryWithCountModel } from 'src/app/models/category-with-count.model';
 import { CategoryModel } from '../../models/category.model';
 import { ArticleService} from '../../services/article.service';
 import { CategoryService } from '../../services/category.service';
@@ -15,7 +16,7 @@ import { CategoryService } from '../../services/category.service';
 export class ArticlesListComponent implements OnInit{
   @ViewChildren("checkboxes") checkboxes: QueryList<ElementRef>
   articles: ArticleCardModel[] = []
-  categories: CategoryModel[] = []
+  categories: CategoryWithCountModel[] = []
   selected: CategoryModel[] = []
   title: string
   author: string
@@ -62,7 +63,7 @@ export class ArticlesListComponent implements OnInit{
 
   ByAsc() {
     document.getElementById("by oldest").setAttribute("checked", "checked");
-      document.getElementById("by newest").removeAttribute("checked");
+    document.getElementById("by newest").removeAttribute("checked");
     document.getElementById("asc").style.backgroundColor="#545b62";
     document.getElementById("desc").style.backgroundColor="#6c757d";
     this.articles.reverse();
@@ -110,7 +111,7 @@ export class ArticlesListComponent implements OnInit{
   }
 
   getAllCategories() {
-    this.categoryService.getAllCategories().subscribe(data => {
+    this.categoryService.getCategoriesWithCount().subscribe(data => {
       this.categories = data
     })
   }

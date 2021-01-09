@@ -68,5 +68,24 @@ namespace ArticlesService.Infrastructure.Repositories
                 })
                 .ToList();
         }
+
+        public List<CategoryWithCountDto> GetCategoriesWithCount()
+        {
+            var categories = _context.Categories;
+            var articleCategories = _context.ArticleCategories;
+            List<CategoryWithCountDto> result = new List<CategoryWithCountDto>();
+
+            foreach (var category in categories)
+            {
+                result.Add(new CategoryWithCountDto 
+                { 
+                    Id = category.Id, 
+                    Title = category.Title,
+                    Count = articleCategories.Where(c => c.CategoryId == category.Id).Count() 
+                });
+            }
+
+            return result;
+        }
     }
 }

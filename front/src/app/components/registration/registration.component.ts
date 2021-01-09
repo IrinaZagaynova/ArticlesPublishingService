@@ -9,7 +9,6 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent {
-
   constructor(
     private authService: AuthService,
     private router: Router

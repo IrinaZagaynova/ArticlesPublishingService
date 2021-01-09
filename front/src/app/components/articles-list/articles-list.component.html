@@ -15,6 +15,7 @@
       <div *ngFor="let category of categories, index as i">
         <input #checkboxes type="checkbox" [(ngModel)]="category[i]" (ngModelChange)="addSelected(category, $event)"/>
         {{category.title}}
+        {{category.count}}
       </div>
     </div>
     <button type="button" class="btn btn-dark btn-sm" id="discard-seach-button" (click)="getArticlesByCategories()" onclick="this.blur()">Apply</button>

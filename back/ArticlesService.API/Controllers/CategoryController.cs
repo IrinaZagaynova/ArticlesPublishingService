@@ -35,5 +35,11 @@ namespace ArticlesService.API.Controllers
         {
             return Ok(_repository.GetSelectedCategories(articleId));
         }
+
+        [HttpGet("categories-with-count")]
+        public IActionResult GetCategoriesWithCount()
+        {
+            return Ok(_repository.GetCategoriesWithCount());
+        }
     }
 }
