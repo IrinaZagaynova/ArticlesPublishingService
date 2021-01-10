@@ -17,7 +17,7 @@ export class EditArticleComponent implements OnInit {
   description: string
   content: string
   isImagesСhanged: boolean = false
-  selectedCategories: CategoryModel[] = []
+  selectedCategories: SelectedCategoryModel[] = []
   myFiles: string[] = []
   options: SelectedCategoryModel[] = []
   images: ImageModel[] = []
@@ -43,13 +43,18 @@ export class EditArticleComponent implements OnInit {
   getDefaultSelectedCetegories() {
     this.categoryService.getSelectedCategories(this.router.snapshot.params.id).subscribe(data => {
       this.options = data
+      this.options.forEach(option => {
+        if (option.checked) {
+          this.selectedCategories.push(option)
+        }
+      });
     })
   }
 
   editArticle() {
-    let dataImages: number[] = []
+    let imagesData: number[] = []
 
-    if (this.isImagesСhanged == true) {
+    if (this.isImagesСhanged) {
       const formData = new FormData();
 
       if (this.myFiles.length != 0) {
@@ -69,10 +74,10 @@ export class EditArticleComponent implements OnInit {
       }
     }
     else {
-      dataImages = this.images.map(x => x.id)
+      imagesData = this.images.map(x => x.id)
     }
 
-    this.articleService.editArticle(this.router.snapshot.params.id, this.title, this.description, this.content, this.selectedCategories.map(x => x.id), dataImages)
+    this.articleService.editArticle(this.router.snapshot.params.id, this.title, this.description, this.content, this.selectedCategories.map(x => x.id), imagesData)
     .subscribe(() => {
       location.reload()
     }, () => {
