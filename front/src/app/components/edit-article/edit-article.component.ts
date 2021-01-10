@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CategoryModel } from 'src/app/models/category.model';
 import { ImageModel } from 'src/app/models/image.model';
 import { SelectedCategoryModel } from 'src/app/models/selected-category.model';
 import { ArticleService } from 'src/app/services/article.service';

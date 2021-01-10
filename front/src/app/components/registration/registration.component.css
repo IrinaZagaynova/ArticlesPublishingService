@@ -17,3 +17,9 @@
   margin-left: 10px;
   margin-right: 10px;
 }
+
+.alert
+{
+  padding: 3px 7px;
+  margin-bottom: 0;
+}
