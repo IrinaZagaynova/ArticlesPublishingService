@@ -1,14 +1,15 @@
 <div class="common">
-  <h1>{{article.title}}</h1>
+  <h5 class="title">{{ article.title }}</h5>
+  <div class="login-and-date">
+    <p class="autor-login">{{ article.userLogin }}</p>
+    <p class="date-view">{{ article.creationDate | date:'MMM d, y, H:mm'}}</p>
+  </div>
   <div class="categories-list">
     <div class="row row-cols-7 row-cols-md-7">
       <div *ngFor="let category of categories" class="categories">
         <app-category [category]="category"></app-category>
       </div>
     </div>
-  </div>
-  <div class= "autor-login">
-    <p>author: {{article.userLogin}}</p>
   </div>
   <div class="content">
     <p>{{article.content}}</p>

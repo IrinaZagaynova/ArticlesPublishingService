@@ -20,6 +20,8 @@ namespace ArticlesService.Domain.Models
         [Required]
         [Column("content")]
         public string Content { get; set; }
+        [Column("creation-date")]
+        public DateTime CreationDate { get; set; }
         [Column("id_user")]
         public int UserId { get; set; }
         public User User { get; set; }

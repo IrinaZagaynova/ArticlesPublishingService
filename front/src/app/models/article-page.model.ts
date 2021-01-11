@@ -3,4 +3,5 @@ export class ArticlePageModel {
   title: string
   content: string
   userLogin: string
+  creationDate: string
 }

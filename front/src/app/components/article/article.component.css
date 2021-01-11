@@ -3,6 +3,11 @@
   margin: 0 25% 0;
 }
 
+.title
+{
+  margin: 5px auto 5px;
+}
+
 .autor-login
 {
   height: 30px;
@@ -17,7 +22,7 @@
 
 .categories-list
 {
-  margin-left: 10px;
+  margin: 0 10px 0;
 }
 
 .images
@@ -41,3 +46,18 @@
   text-align: justify;
 }
 
+.login-and-date
+{
+  display: inline-flex;
+}
+
+.autor-login
+{
+  margin-bottom: 2px;
+}
+
+.date-view
+{
+  margin-left: 10px;
+  margin-bottom: 2px;
+}

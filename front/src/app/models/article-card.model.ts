@@ -3,4 +3,5 @@ export class ArticleCardModel {
   title: string
   description: string
   userLogin: string
+  creationDate: string
 }

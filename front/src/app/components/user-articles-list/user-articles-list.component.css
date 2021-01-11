@@ -12,3 +12,14 @@
 {
   margin-left: 15px;
 }
+
+.title-and-date
+{
+  display: inline-flex;
+}
+
+.date-view
+{
+  position: absolute;
+  right: 15px;
+}

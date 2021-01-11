@@ -28,7 +28,7 @@ export class ArticleService {
   }
 
   getArticleToPage(id: number) {
-    return this.http.get<ArticlePageModel>(this.apiUrl + `api/Article/article/${id}`)
+    return this.http.get<ArticlePageModel>(this.apiUrl + `api/Article/article-page/${id}`)
   }
 
   getAtriclesByTitle(title: string) {

@@ -30,6 +30,9 @@ namespace ArticlesService.Infrastructure
             modelBuilder.Entity<User>()
                 .HasIndex(u => u.EMail)
                 .IsUnique(true);
+
+            modelBuilder.Entity<Article>()
+                .HasIndex(a => a.CreationDate);
         }
     }
 }

@@ -25,9 +25,10 @@ namespace ArticlesService.Infrastructure.Repositories
                     Id = a.Id,
                     Title = a.Title,
                     Description = a.Description,
-                    UserLogin = a.User.Login
+                    UserLogin = a.User.Login,
+                    CreationDate = a.CreationDate
                 })
-                .OrderByDescending(a => a.Id).ToList();
+                .OrderByDescending(a => a.CreationDate).ToList();
         }
 
         public ArticlePageDto GetArticleToPage(int articleId)
@@ -38,7 +39,8 @@ namespace ArticlesService.Infrastructure.Repositories
                     Id = a.Id,
                     Title = a.Title,
                     Content = a.Content,
-                    UserLogin = a.User.Login
+                    UserLogin = a.User.Login,
+                    CreationDate = a.CreationDate
                 })
                 .SingleOrDefault(a => a.Id == articleId);
         }
@@ -51,10 +53,10 @@ namespace ArticlesService.Infrastructure.Repositories
                     Id = a.Id,
                     Title = a.Title,
                     Description = a.Description,
-                    UserLogin = a.User.Login
+                    UserLogin = a.User.Login,
+                    CreationDate = a.CreationDate
                 })
-                .OrderByDescending(a => a.Id).ToList();
-
+                .OrderByDescending(a => a.CreationDate).ToList();
         }
 
         public List<ArticleCardDto> GetArticlesByAuthorLogin(string login)
@@ -65,9 +67,10 @@ namespace ArticlesService.Infrastructure.Repositories
                     Id = a.Id,
                     Title = a.Title,
                     Description = a.Description,
-                    UserLogin = a.User.Login
+                    UserLogin = a.User.Login,
+                    CreationDate = a.CreationDate
                 })
-                .ToList();
+                .OrderByDescending(a => a.CreationDate).ToList();
         }
 
         private ArticleCardDto GetArticleCardDto(Article article)
@@ -77,13 +80,14 @@ namespace ArticlesService.Infrastructure.Repositories
                 Id = article.Id,
                 Title = article.Title,
                 Description = article.Description,
-                UserLogin = article.User.Login
+                UserLogin = article.User.Login,
+                CreationDate = article.CreationDate
             };
         }
 
         public List<ArticleCardDto> GetArticlesByCategories(List<int> categories)
         {
-            var articles = _context.Articles.Include(a => a.User).Include(a => a.ArticleCategories).OrderByDescending(a => a.Id);
+            var articles = _context.Articles.Include(a => a.User).Include(a => a.ArticleCategories).OrderByDescending(a => a.CreationDate);
             var result = new List<ArticleCardDto>();
 
             foreach (var article in articles)
@@ -107,9 +111,10 @@ namespace ArticlesService.Infrastructure.Repositories
                 {
                     Id = a.Id,
                     Title = a.Title,
-                    Description = a.Description
+                    Description = a.Description,
+                    CreationDate = a.CreationDate
                 })
-                .OrderByDescending(a => a.Id).ToList();
+                .OrderByDescending(a => a.CreationDate).ToList();
         }
 
         public bool IsUserAuthorOfArticle(int userId, int articleId)
@@ -132,6 +137,7 @@ namespace ArticlesService.Infrastructure.Repositories
                 Title = createArticleDto.Title,
                 Description = createArticleDto.Description,
                 Content = createArticleDto.Content,
+                CreationDate = DateTime.Now,
                 User = user
             };
 
