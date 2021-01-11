@@ -126,7 +126,8 @@ export class ArticlesListComponent implements OnInit{
   }
 
   discardSearch() {
-    this.getArticles();
+    this.selected = []
+    this.getArticles()
     this.uncheckAll()
   }
 
