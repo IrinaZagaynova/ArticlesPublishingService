@@ -43,13 +43,6 @@ export class ArticlesListComponent implements OnInit{
     })
   }
 
-  getArticlesByAsc()
-  {
-    this.articleService.articles_by_asc.subscribe(data => {
-      this.articles = data
-    })
-  }
-
   ByDesc() {
     if (document.getElementById("by newest").getAttribute("checked") != "checked")
     {
